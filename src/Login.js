@@ -4,12 +4,20 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
-        <div className="login-buffer" />
-        <div className="login-body">
-          <div className="login-header">Spotlist</div>
-          <a href={this._generateSpotifyLink()}>Login to Spotify</a>
+        <div className="login-header">
+          Spotlist
         </div>
-        <div className="login-buffer" />
+        <div className="login-description">
+          A better way to make Spotify playlists
+        </div>
+        <a href={this._generateSpotifyLink()}>
+          <div className="button login-button">
+            Login to Spotify
+          </div>
+        </a>
+        <div className="copy">
+          Not affiliated to Spotify
+        </div>
       </div>
     );
   }
