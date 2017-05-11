@@ -17,6 +17,7 @@ class CreateButton extends Component {
             (this.state.isEditing ? ' editing' : '')
         }
         onClick={this.state.isEditing ? null : this._setEditing}
+        onKeyUp={this._handleKeyUp}
       >
         {this.state.isEditing
           ? [
@@ -26,8 +27,11 @@ class CreateButton extends Component {
                 defaultValue={'Playlist name...'}
                 placeholder="Enter playlist name..."
                 ref="input"
+                key="input"
               />,
-              <a href="#" onClick={this._createPlaylist} className="create-playlist-go">Go</a>
+              <a href="#" key="btn" onClick={this._createPlaylist} className="create-playlist-go">
+                Go
+              </a>
             ]
           : <a
               href="#"
@@ -43,15 +47,35 @@ class CreateButton extends Component {
   }
 
   _setEditing = () => {
-    this.setState({
-      isEditing: true
-    });
+    this.setState(
+      {
+        isEditing: true
+      },
+      () => {
+        // Focus the input
+        const input = this.refs.input;
+        input.focus();
+        input.setSelectionRange(0, input.value.length);
+      }
+    );
   };
 
   _createPlaylist = evt => {
-    evt.stopPropagation();
-    evt.preventDefault();
+    if (evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+    }
     this.props.onCreate(this.refs.input.value);
+  };
+
+  _handleKeyUp = evt => {
+    if (evt.keyCode === 27) {
+      // Escape
+      this.setState({ isEditing: false });
+    } else if (evt.keyCode === 13 && this.state.isEditing) {
+      this._createPlaylist();
+      this.setState({ isEditing: false });
+    }
   };
 }
 
