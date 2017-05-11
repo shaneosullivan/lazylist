@@ -56,6 +56,8 @@ class GridColumn extends Component {
   }
 
   _toggleArtist = evt => {
+    evt.stopPropagation();
+    evt.preventDefault();
     this.props.onArtistToggle(this.props.artist);
   };
 }
