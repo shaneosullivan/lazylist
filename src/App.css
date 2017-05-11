@@ -1,0 +1,282 @@
+@font-face {
+    font-family: "Circular";
+    src: url("font/CircularStd-Book.woff");
+}
+
+html, body, #root, .App {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  font-family: "Circular";
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: #000;
+  text-decoration: none;
+}
+a:hover {
+  opacity: 0.8;
+}
+
+.App {
+  background-color: black;
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+.login {
+  padding: 36px;
+  background-color: #000;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.login div {
+  margin: 16px;
+}
+.login-header {
+  font-size: 72px;
+}
+.login-description {
+  font-size: 24px;
+  margin-bottom: 32px !important;
+
+}
+
+.login-button {
+  color: #fff;
+  width: 282px;
+  height: 64px;
+}
+
+.loading {
+  color: white;
+  font-size: 24px;
+  margin-top: 100px;
+}
+.percent {
+  font-size: 300px;
+}
+
+.main {
+  background-color: #000000;
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+.grid-outer {
+  font-size: 0;
+}
+
+.grid-col {
+  float: left;
+  width: 180px;
+}
+
+.grid-artist-name {
+  color: #fff;
+  display: block;
+  font-size: 18px;
+  height: 65px;
+  padding-top: 49px;
+  overflow: hidden;
+  width: 180px;
+  position: absolute;
+  z-index: 3;
+  background: #000;
+  text-decoration: none;
+}
+.grid-tracks {
+  margin-top: 120px;
+}
+.grid-cell {
+  display: inline-block;
+  background-size: contain;
+  width: 115px;
+  height: 115px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  margin: 2px;
+  border-radius: 100px;
+}
+
+.grid-cell:hover {
+  transform: scale(1.2);
+  transition: transform 0.1s ease-out;
+  z-index: 2;
+  opacity: 1;
+  box-shadow: 0px 10px 40px #000000;
+}
+
+.grid-cell:hover .grid-cell-label {
+  opacity: 1;
+}
+.selected {
+  opacity: 1;
+}
+.unselected {
+  opacity: 0.1;
+}
+.selectedLabel {
+  opacity: 1;
+}
+.unselectedLabel {
+  opacity: 0.1;
+}
+
+.grid-cell-label {
+  color: #ffffff;
+  margin-top: 0px;
+  font-size: 14px;
+  text-decoration: none;
+  padding-top: 8px;
+  padding-bottom: 32px;
+  padding-left: 24px;
+  padding-right: 24px;
+  overflow: hidden;
+  transition: opacity 0.1s linear;
+}
+
+
+.grid-cell-tick {
+  position: absolute;
+  margin-left: 140px;
+  margin-top: -20px;
+  height: 20px;
+  width: 20px;
+  background-color: rgba(255,255,255,0.6);
+  background-position: center center;
+  background-image: url(images/tick.png);
+  background-size: 13px 9px;
+  background-repeat: no-repeat;
+  border-radius: 100px;
+  box-shadow: 0px 10px 40px #000000;
+  z-index: 3;
+}
+
+.menu-button {
+  position: fixed;
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 64px;
+  bottom: 20px;
+  left: 20px;
+  height: 64px;
+  width: 64px;
+  background-color: #5ed856;
+  border-radius: 100px;
+  background-image: url(images/hamburger.png);
+  background-repeat: no-repeat;
+  background-size: 19px 15px;
+  background-position: 23px 26px;
+  z-index: 3;
+}
+
+.menu-button-link {
+  padding: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  z-index: 5;
+}
+
+.full-screen-menu {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+  font-size: 72px;
+  padding: 20px;
+  z-index: 4;
+}
+.button {
+  font-size: 20px;
+  cursor: pointer;
+  line-height: 64px;
+  background-color: #5ed856;
+  border-radius: 100px;
+  color: #000;
+}
+.button:hover {
+  background-color: #4BAC44;
+}
+
+
+.create-playlist {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 282px;
+  height: 64px;
+  z-index: 3;
+  transition: width 0.1s ease-in;
+}
+
+.create-playlist.editing {
+  width: 400px;
+}
+
+.create-playlist a {
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
+}
+
+.create-playlist-input {
+  margin-right: 8px;
+  font-size: 24px;
+  width: 280px;
+  border-radius: 18px;
+  padding: 4px;
+  padding-left: 20px;
+  margin-top: 13px;
+  border: none;
+  background: none;
+  outline: none;
+  color: #000;
+  opacity: 0.5;
+}
+
+.create-playlist-go {
+  border: none;
+  border-radius: 20px;
+  padding: 8px;
+  color: #fff;
+}
+
+.visible {
+  display: inherit;
+}
+
+.invisible {
+  display: none;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
