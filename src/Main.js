@@ -7,7 +7,7 @@ import MenuButton from './MenuButton';
 
 const STATE_LOADING = 'loading';
 
-const GRID_CELL_SIZE = 115;
+const GRID_CELL_SIZE = 180;
 const LOCAL_STORAGE_KEY = '__top_artists__';
 const NUM_ARTISTS = 50;
 const NUM_TRACKS = 50;
