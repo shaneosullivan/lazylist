@@ -21,10 +21,12 @@ class MenuButton extends Component {
       <div className="menu-button">
         {this.state.isOpen
           ? <div className="full-screen-menu" onClick={this._close}>
-              See your top tracks ranked by their overall popularity, add tracks and add to a playlist
+              <div className="description">
+                We found your favorite artists and selected your top tracks. Export it to Spotify or click on tracks and artists to add to your playlist.
+              </div>
             </div>
           : null}
-        <a href="#" className="menu-button-link" onClick={this._open} />
+        <a href="#" className="button menu-button-link" onClick={this._open} />
       </div>
     );
   }

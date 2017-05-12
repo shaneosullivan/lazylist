@@ -41,8 +41,8 @@ class GridColumn extends Component {
             this._toggleTrack(track);
           }}
         />
-        <div className={'grid-cell-tick' + tickStyle} />
         <div className={'grid-cell-label' + labelStyle}>{track.name}</div>
+        <div className={'grid-cell-tick' + tickStyle} />
       </div>
     );
   };

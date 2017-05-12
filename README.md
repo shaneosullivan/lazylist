@@ -1,2 +1,2 @@
 # spotlist
-A website that provides a fun way to build play lists in Spotify
+A better way to make Spotify playlists
