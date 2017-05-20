@@ -51,6 +51,15 @@ class Main extends Component {
     if (artists.length > 0) {
       width = GRID_CELL_SIZE * artists.length + 'px';
       content = (
+        <div>
+        <div className="intro">
+          <div className="description">
+            Here are your top artists and tracks on Spotify. <br />Click on the circles and start making playlists!
+          </div>
+          <div className="button intro-button">
+            OK
+          </div>
+        </div>
         <div className="grid-outer" style={{ width }}>
           {artists.map(this._renderColumn)}
           <CreateButton
@@ -59,12 +68,16 @@ class Main extends Component {
           />
           <MenuButton />
         </div>
+        </div>
       );
     } else {
       content = <Loading percentComplete={this.state.percentComplete} />;
     }
-
-    return <div className="main" style={{ width }}>{content}</div>;
+    return (
+    <div className="main" style={{ width }}>
+      {content}
+    </div>
+    );
   }
 
   _renderColumn = artist => {
