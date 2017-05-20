@@ -4,6 +4,7 @@ import CreateButton from './CreateButton';
 import GridColumn from './GridColumn';
 import Loading from './Loading';
 import MenuButton from './MenuButton';
+import IntroButton from './IntroButton';
 
 const STATE_LOADING = 'loading';
 
@@ -52,14 +53,7 @@ class Main extends Component {
       width = GRID_CELL_SIZE * artists.length + 'px';
       content = (
         <div>
-        <div className="intro">
-          <div className="description">
-            Here are your top artists and tracks on Spotify. <br />Click on the circles and start making playlists!
-          </div>
-          <div className="button intro-button">
-            OK
-          </div>
-        </div>
+        <IntroButton />
         <div className="grid-outer" style={{ width }}>
           {artists.map(this._renderColumn)}
           <CreateButton
