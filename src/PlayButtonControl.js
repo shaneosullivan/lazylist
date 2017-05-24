@@ -7,7 +7,7 @@ import React, { Component } from 'react';
 class PlayButton extends Component {
   render() {
     return (
-      <span className="play-button">
+      <span className={'play-button ' + (this.props.isLoaded ? '' : 'invisible')}>
         <iframe
           src={'https://open.spotify.com/embed?uri=spotify:track:' + this.props.trackID}
           frameBorder="0"
@@ -57,7 +57,7 @@ export default class PlayButtonControl extends Component {
   _renderButton = (trackID, idx) => {
     return (
       <div key={trackID} className="play-button-control-inner">
-        <PlayButton trackID={trackID} onLoad={this._handleLoad} />
+        <PlayButton trackID={trackID} isLoaded={idx === 0} onLoad={this._handleLoad} />
       </div>
     );
   };
