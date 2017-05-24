@@ -5,6 +5,7 @@ import GridColumn from './GridColumn';
 import Loading from './Loading';
 import MenuButton from './MenuButton';
 import PlayButtonControl from './PlayButtonControl';
+import IntroButton from './IntroButton';
 
 const STATE_LOADING = 'loading';
 
@@ -53,21 +54,27 @@ class Main extends Component {
     if (artists.length > 0) {
       width = GRID_CELL_SIZE * artists.length + 'px';
       content = (
-        <div className="grid-outer" style={{ width }}>
-          {artists.map(this._renderColumn)}
-          <CreateButton
-            onCreate={this._createPlaylist}
-            selectionCount={this.state.selectionCount}
-          />
-          <MenuButton />
-          <PlayButtonControl trackID={this.state.mostRecentSelection} />
+        <div>
+          <IntroButton />
+          <div className="grid-outer" style={{ width }}>
+            {artists.map(this._renderColumn)}
+            <CreateButton
+              onCreate={this._createPlaylist}
+              selectionCount={this.state.selectionCount}
+            />
+            <MenuButton />
+            <PlayButtonControl trackID={this.state.mostRecentSelection} />
+          </div>
         </div>
       );
     } else {
       content = <Loading percentComplete={this.state.percentComplete} />;
     }
-
-    return <div className="main" style={{ width }}>{content}</div>;
+    return (
+      <div className="main" style={{ width }}>
+        {content}
+      </div>
+    );
   }
 
   _renderColumn = artist => {
