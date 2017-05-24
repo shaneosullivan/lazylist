@@ -322,7 +322,7 @@ a:hover {
 .play-button-control-wrapper {
   position: absolute;
   top: 36px;
-  left: 68px;
+  left: 67px;
   z-index: 2;
   transform: scale(1.5);
   transform-origin: 20px 20px;
