@@ -63,7 +63,6 @@ export default class PlayButtonControl extends Component {
   };
 
   _handleLoad = trackID => {
-    console.log('loaded', trackID);
     let trackIDs = this.state.trackIDs;
     if (trackIDs.length > 1 && trackIDs[trackIDs.length - 1] === trackID) {
       this.setState({ trackIDs: [trackID] });
