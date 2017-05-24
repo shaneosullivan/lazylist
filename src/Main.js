@@ -4,6 +4,7 @@ import CreateButton from './CreateButton';
 import GridColumn from './GridColumn';
 import Loading from './Loading';
 import MenuButton from './MenuButton';
+import PlayButtonControl from './PlayButtonControl';
 
 const STATE_LOADING = 'loading';
 
@@ -23,6 +24,7 @@ class Main extends Component {
       state: STATE_LOADING,
       artists: [],
       selection: {},
+      mostRecentSelection: null,
       selectionCount: 0,
       percentComplete: 0
     };
@@ -58,6 +60,7 @@ class Main extends Component {
             selectionCount={this.state.selectionCount}
           />
           <MenuButton />
+          <PlayButtonControl trackID={this.state.mostRecentSelection} />
         </div>
       );
     } else {
@@ -115,7 +118,8 @@ class Main extends Component {
 
     this.setState({
       selection,
-      selectionCount: this.state.selectionCount + (selection[track.id] ? 1 : -1)
+      selectionCount: this.state.selectionCount + (selection[track.id] ? 1 : -1),
+      mostRecentSelection: selection[track.id] ? track.id : null
     });
   };
 
@@ -141,7 +145,8 @@ class Main extends Component {
 
     this.setState({
       selection,
-      selectionCount: this.state.selectionCount + changedCount
+      selectionCount: this.state.selectionCount + changedCount,
+      mostRecentSelection: null
     });
   };
 
