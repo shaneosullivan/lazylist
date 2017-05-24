@@ -34,12 +34,10 @@ export default class PlayButtonControl extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.trackID) {
-      // Add it to the list of tracks
-      this.setState({
-        trackIDs: nextProps.trackID ? this.state.trackIDs.concat([nextProps.trackID]) : []
-      });
-    }
+    // Add it to the list of tracks
+    this.setState({
+      trackIDs: nextProps.trackID ? this.state.trackIDs.concat([nextProps.trackID]) : []
+    });
   }
 
   render() {
