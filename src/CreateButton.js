@@ -39,7 +39,7 @@ class CreateButton extends Component {
                 evt.preventDefault();
               }}
             >
-              Create Playlist
+              Export to Spotify
               <span className="create-playlist-count"> ({this.props.selectionCount})</span>
             </a>}
       </span>
