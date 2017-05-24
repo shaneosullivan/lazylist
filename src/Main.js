@@ -4,7 +4,6 @@ import CreateButton from './CreateButton';
 import GridColumn from './GridColumn';
 import Loading from './Loading';
 import MenuButton from './MenuButton';
-import PlayButtonControl from './PlayButtonControl';
 import IntroButton from './IntroButton';
 
 const STATE_LOADING = 'loading';
@@ -63,7 +62,6 @@ class Main extends Component {
               selectionCount={this.state.selectionCount}
             />
             <MenuButton />
-            <PlayButtonControl trackID={this.state.mostRecentSelection} />
           </div>
         </div>
       );
@@ -83,6 +81,7 @@ class Main extends Component {
         artist={artist}
         key={artist.id}
         selection={this.state.selection}
+        mostRecentSelection={this.state.mostRecentSelection}
         onArtistToggle={this._toggleArtist}
         onTrackToggle={this._toggleTrack}
       />

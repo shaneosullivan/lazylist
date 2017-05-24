@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PlayButtonControl from './PlayButtonControl';
 
 class GridColumn extends Component {
   render() {
@@ -29,7 +30,7 @@ class GridColumn extends Component {
     const labelStyle = this._isTrackSelected(track) ? ' selectedLabel' : ' unselectedLabel';
 
     return (
-      <div key={idx}>
+      <div key={idx} className="grid-cell-wrapper">
         <a
           href="#"
           key={track.id}
@@ -40,6 +41,9 @@ class GridColumn extends Component {
             evt.stopPropagation();
             this._toggleTrack(track);
           }}
+        />
+        <PlayButtonControl
+          trackID={track.id === this.props.mostRecentSelection ? track.id : null}
         />
         <div className={'grid-cell-label' + labelStyle}>{track.name}</div>
         <div className={'grid-cell-tick' + tickStyle} />
