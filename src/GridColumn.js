@@ -45,7 +45,7 @@ class GridColumn extends Component {
         <PlayButtonControl
           trackID={track.id === this.props.mostRecentSelection ? track.id : null}
         />
-        <div className={'grid-cell-label' + labelStyle}>{track.name}</div>
+        <div className={'grid-cell-label' + labelStyle}><span className="label">{track.name}</span></div>
         <div className={'grid-cell-tick' + tickStyle} />
       </div>
     );
