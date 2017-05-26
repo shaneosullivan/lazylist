@@ -22,10 +22,10 @@ class IntroButton extends Component {
         {this.state.isOpen
           ? <div className="full-screen-menu" onClick={this._close}>
               <div className="description">
-                We found your favorite tracks. Click on the circles to add to a playlist and export to Spotify. 
+                We found your favorite music and similar tracks you might like. Click on the circles to make a Spotify playlist.
               </div>
               <div className="button intro-button" onClick={this._close}>
-                OK
+                GOTCHA
               </div>
             </div>
           : null}
