@@ -277,7 +277,7 @@ class Main extends Component {
                   timeRanges.length
             );
             if (completeCount === timeRanges.length) {
-              fetchTopTracksForArtist(topArtists[0]);
+              fetchTopTracksForMultipleArtists();
             }
           },
           err => {
@@ -288,34 +288,48 @@ class Main extends Component {
     }
 
     const MY_TOP_ARTISTS_TRACKS_TOTAL_PERC = 100;
-    function fetchTopTracksForArtist(artist) {
-      spotify.getArtistTopTracks(artist.id, 'US').then(
-        data => {
-          // Filter out any tracks we've already gotten from the users top tracks
-          artist.topTracks = (artist.topTracks || [])
-            .concat(data.tracks.filter(track => !topTrackIDs[track.id]));
+    function fetchTopTracksForMultipleArtists() {
+      for (let i = 0; i < 4; i++) {
+        fetchTopTracksForNextArtist();
+      }
+    }
 
-          if (artist.topTracks.length > MAX_TRACKS) {
-            artist.topTracks = artist.topTracks.slice(0, MAX_TRACKS);
-          }
-          artistCounter++;
-          setPercentComplete(
-            MY_TOP_ARTISTS_TOTAL_PERC +
-              (MY_TOP_ARTISTS_TRACKS_TOTAL_PERC - MY_TOP_ARTISTS_TOTAL_PERC) *
-                artistCounter /
-                topArtists.length
-          );
-          if (artistCounter < topArtists.length) {
-            // Get the next artist
-            fetchTopTracksForArtist(topArtists[artistCounter]);
-          } else {
-            finalizeData();
-          }
-        },
-        err => {
-          console.error(err);
+    let fetchedArtists = {};
+    function fetchTopTracksForNextArtist() {
+      const callback = (artist, data) => {
+        // Filter out any tracks we've already gotten from the users top tracks
+        artist.topTracks = (artist.topTracks || [])
+          .concat(data.tracks.filter(track => !topTrackIDs[track.id]));
+
+        if (artist.topTracks.length > MAX_TRACKS) {
+          artist.topTracks = artist.topTracks.slice(0, MAX_TRACKS);
         }
-      );
+        artistCounter++;
+        setPercentComplete(
+          MY_TOP_ARTISTS_TOTAL_PERC +
+            (MY_TOP_ARTISTS_TRACKS_TOTAL_PERC - MY_TOP_ARTISTS_TOTAL_PERC) *
+              artistCounter /
+              topArtists.length
+        );
+        if (artistCounter < topArtists.length) {
+          // Get the next artist
+          fetchTopTracksForNextArtist();
+        } else {
+          finalizeData();
+        }
+      };
+      const errorHandler = err => {
+        console.error(err);
+      };
+
+      return topArtists.some(artist => {
+        if (fetchedArtists[artist.id]) {
+          return false;
+        }
+        fetchedArtists[artist.id] = true;
+        spotify.getArtistTopTracks(artist.id, 'US').then(callback.bind(this, artist), errorHandler);
+        return true;
+      });
     }
 
     fetchMyTopTracks();
