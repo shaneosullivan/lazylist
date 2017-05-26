@@ -6,6 +6,7 @@ import GridColumnHeader from './GridColumnHeader';
 import Loading from './Loading';
 import MenuButton from './MenuButton';
 import IntroButton from './IntroButton';
+import throttle from './throttle';
 
 const STATE_LOADING = 'loading';
 
@@ -15,6 +16,7 @@ const NUM_ARTISTS = 50;
 const NUM_TRACKS = 50;
 const MAX_TRACKS = 10;
 const MAX_TRACKS_PER_PLAYLIST_ADDITION = 100;
+const SCROLL_BUFFER = GRID_CELL_SIZE;
 
 const VERSION = 1;
 
@@ -29,7 +31,9 @@ class Main extends Component {
       mostRecentSelection: null,
       selectionCount: 0,
       percentComplete: 0,
-      isEditingPlaylistName: false
+      isEditingPlaylistName: false,
+      scrollX: window.scrollX,
+      containerWidth: window.innerWidth
     };
   }
 
@@ -47,6 +51,15 @@ class Main extends Component {
         this._fetchData();
       }
     );
+
+    // Kind of nasty to listen to global scroll events here.
+    // YOLO.
+    this._handleScroll = throttle(this._handleScroll, 250);
+    window.addEventListener('scroll', this._handleScroll, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._handleScroll, false);
   }
 
   render() {
@@ -87,12 +100,15 @@ class Main extends Component {
     return <GridColumnHeader artist={artist} key={artist.id} onArtistToggle={this._toggleArtist} />;
   };
 
-  _renderColumn = artist => {
+  _renderColumn = (artist, idx) => {
+    const leftColPos = idx * GRID_CELL_SIZE;
+    const imagesVisible = leftColPos > this.state.scrollX - SCROLL_BUFFER &&
+      leftColPos < this.state.scrollX + this.state.containerWidth + SCROLL_BUFFER;
     return (
       <GridColumn
         artist={artist}
         key={artist.id}
-        artistOnly={false}
+        imagesVisible={imagesVisible}
         selection={this.state.selection}
         mostRecentSelection={this.state.mostRecentSelection}
         onArtistToggle={this._toggleArtist}
@@ -183,6 +199,13 @@ class Main extends Component {
       selection,
       selectionCount: this.state.selectionCount + changedCount,
       mostRecentSelection: null
+    });
+  };
+
+  _handleScroll = (evt: any) => {
+    this.setState({
+      scrollX: window.scrollX,
+      containerWidth: window.innerWidth
     });
   };
 

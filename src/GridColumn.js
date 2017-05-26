@@ -15,7 +15,7 @@ class GridColumn extends Component {
 
   _renderTrack = (track, idx) => {
     var imageUrl;
-    if (track.album && track.album.images) {
+    if (this.props.imagesVisible && track.album && track.album.images) {
       if (track.album.images.length > 1) {
         imageUrl = track.album.images[1].url;
       } else {
