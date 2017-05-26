@@ -13,6 +13,7 @@ const LOCAL_STORAGE_KEY = '__top_artists__';
 const NUM_ARTISTS = 50;
 const NUM_TRACKS = 50;
 const MAX_TRACKS = 10;
+const MAX_TRACKS_PER_PLAYLIST_ADDITION = 100;
 
 const VERSION = 1;
 
@@ -104,9 +105,20 @@ class Main extends Component {
             for (let id in selection) {
               uris.push(selection[id].uri);
             }
-            spotify.addTracksToPlaylist(me.id, playlist.id, uris).then(() => {
-              alert('Playlist created with ' + uris.length + ' tracks');
-            });
+
+            // Only possible to do max of 100 tracks per addition so chunk it
+            let promises = [];
+            for (let i = 0; i < uris.length; i += MAX_TRACKS_PER_PLAYLIST_ADDITION) {
+              let trackUris = uris.slice(i, i + MAX_TRACKS_PER_PLAYLIST_ADDITION);
+              promises.push(spotify.addTracksToPlaylist(me.id, playlist.id, trackUris));
+            }
+            Promise.all(promises)
+              .then(() => {
+                alert('Playlist created with ' + uris.length + ' tracks');
+              })
+              .catch(() => {
+                alert('Failed to add tracks to playlist ');
+              });
           });
       })
       .catch(err => {
