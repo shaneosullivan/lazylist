@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 import CreateButton from './CreateButton';
 import GridColumn from './GridColumn';
+import GridColumnHeader from './GridColumnHeader';
 import Loading from './Loading';
 import MenuButton from './MenuButton';
 import IntroButton from './IntroButton';
@@ -55,9 +56,11 @@ class Main extends Component {
     if (artists.length > 0) {
       width = GRID_CELL_SIZE * artists.length + 'px';
       content = (
-        <div>
-          <IntroButton />
-          <div className="grid-outer" style={{ width }}>
+        <div className="grid-outer" style={{ width }}>
+          <div className="grid-header">
+            {artists.map(this._renderColumnHeader)}
+          </div>
+          <div className="grid-body">
             {artists.map(this._renderColumn)}
             <CreateButton
               isEditing={this.state.isEditingPlaylistName}
@@ -66,6 +69,7 @@ class Main extends Component {
               onEdit={this._editPlaylistName}
             />
             <MenuButton />
+            <IntroButton />
           </div>
         </div>
       );
@@ -79,11 +83,16 @@ class Main extends Component {
     );
   }
 
+  _renderColumnHeader = artist => {
+    return <GridColumnHeader artist={artist} key={artist.id} onArtistToggle={this._toggleArtist} />;
+  };
+
   _renderColumn = artist => {
     return (
       <GridColumn
         artist={artist}
         key={artist.id}
+        artistOnly={false}
         selection={this.state.selection}
         mostRecentSelection={this.state.mostRecentSelection}
         onArtistToggle={this._toggleArtist}

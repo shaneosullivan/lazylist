@@ -6,9 +6,6 @@ class GridColumn extends Component {
     let artist = this.props.artist;
     return (
       <div className="grid-col">
-        <a href="#" onClick={this._toggleArtist} className="grid-artist-name">
-          {artist.name}
-        </a>
         <div className="grid-tracks">
           {artist.topTracks.map(this._renderTrack)}
         </div>
@@ -45,7 +42,9 @@ class GridColumn extends Component {
         <PlayButtonControl
           trackID={track.id === this.props.mostRecentSelection ? track.id : null}
         />
-        <div className={'grid-cell-label' + labelStyle}><span className="label">{track.name}</span></div>
+        <div className={'grid-cell-label' + labelStyle}>
+          <span className="label">{track.name}</span>
+        </div>
         <div className={'grid-cell-tick' + tickStyle} />
       </div>
     );
