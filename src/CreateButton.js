@@ -1,25 +1,18 @@
 import React, { Component } from 'react';
 
 class CreateButton extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isEditing: false
-    };
-  }
-
   render() {
     return (
       <span
         className={
           'create-playlist button' +
             (this.props.selectionCount > 0 ? ' visible' : ' invisible') +
-            (this.state.isEditing ? ' editing' : '')
+            (this.props.isEditing ? ' editing' : '')
         }
-        onClick={this.state.isEditing ? null : this._setEditing}
+        onClick={this.props.isEditing ? null : this._setEditing}
         onKeyUp={this._handleKeyUp}
       >
-        {this.state.isEditing
+        {this.props.isEditing
           ? [
               <input
                 type="text"
@@ -46,18 +39,17 @@ class CreateButton extends Component {
     );
   }
 
+  componentDidUpdate(prevProps: Object): void {
+    if (!prevProps.isEditing && this.props.isEditing) {
+      // Focus the input
+      const input = this.refs.input;
+      input.focus();
+      input.setSelectionRange(0, input.value.length);
+    }
+  }
+
   _setEditing = () => {
-    this.setState(
-      {
-        isEditing: true
-      },
-      () => {
-        // Focus the input
-        const input = this.refs.input;
-        input.focus();
-        input.setSelectionRange(0, input.value.length);
-      }
-    );
+    this.props.onEdit();
   };
 
   _createPlaylist = evt => {

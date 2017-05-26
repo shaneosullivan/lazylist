@@ -27,7 +27,8 @@ class Main extends Component {
       selection: {},
       mostRecentSelection: null,
       selectionCount: 0,
-      percentComplete: 0
+      percentComplete: 0,
+      isEditingPlaylistName: false
     };
   }
 
@@ -59,8 +60,10 @@ class Main extends Component {
           <div className="grid-outer" style={{ width }}>
             {artists.map(this._renderColumn)}
             <CreateButton
-              onCreate={this._createPlaylist}
+              isEditing={this.state.isEditingPlaylistName}
               selectionCount={this.state.selectionCount}
+              onCreate={this._createPlaylist}
+              onEdit={this._editPlaylistName}
             />
             <MenuButton />
           </div>
@@ -89,6 +92,10 @@ class Main extends Component {
     );
   };
 
+  _editPlaylistName = () => {
+    this.setState({ isEditingPlaylistName: true });
+  };
+
   _createPlaylist = (name: string) => {
     const spotify = this.state.spotify;
 
@@ -115,6 +122,8 @@ class Main extends Component {
             Promise.all(promises)
               .then(() => {
                 alert('Playlist created with ' + uris.length + ' tracks');
+
+                this.setState({ isEditingPlaylistName: false });
               })
               .catch(() => {
                 alert('Failed to add tracks to playlist ');
