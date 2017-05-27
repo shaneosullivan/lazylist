@@ -7,8 +7,7 @@ import Loading from './Loading';
 import MenuButton from './MenuButton';
 import IntroButton from './IntroButton';
 import throttle from './throttle';
-
-const STATE_LOADING = 'loading';
+import states from './states';
 
 const GRID_CELL_SIZE = 180;
 const LOCAL_STORAGE_KEY = '__top_artists__';
@@ -25,7 +24,7 @@ class Main extends Component {
     super();
     this.state = {
       spotify: null,
-      state: STATE_LOADING,
+      state: states.LOADING,
       artists: [],
       selection: {},
       mostRecentSelection: null,
@@ -45,7 +44,8 @@ class Main extends Component {
     spotifyApi.setAccessToken(this.props.accessToken);
     this.setState(
       {
-        spotify: spotifyApi
+        spotify: spotifyApi,
+        state: states.LOADING
       },
       () => {
         this._fetchData();
@@ -78,6 +78,7 @@ class Main extends Component {
             <CreateButton
               isEditing={this.state.isEditingPlaylistName}
               selectionCount={this.state.selectionCount}
+              state={this.state.state}
               onCreate={this._createPlaylist}
               onEdit={this._editPlaylistName}
             />
@@ -124,6 +125,8 @@ class Main extends Component {
   _createPlaylist = (name: string) => {
     const spotify = this.state.spotify;
 
+    this.setState({ state: states.CREATING_PLAYLIST });
+
     spotify
       .getMe()
       .then(me => {
@@ -146,12 +149,20 @@ class Main extends Component {
             }
             Promise.all(promises)
               .then(() => {
-                alert('Playlist created with ' + uris.length + ' tracks');
+                this.setState({ isEditingPlaylistName: false, state: states.PLAYLIST_CREATED });
 
-                this.setState({ isEditingPlaylistName: false });
+                setTimeout(
+                  () => {
+                    if (this.state.state === states.PLAYLIST_CREATED) {
+                      this.setState({ state: states.SELECTING });
+                    }
+                  },
+                  2000
+                );
               })
               .catch(() => {
                 alert('Failed to add tracks to playlist ');
+                this.setState({ state: states.SELECTING });
               });
           });
       })
@@ -226,7 +237,8 @@ class Main extends Component {
           artists: topArtists,
           selection: initialSelection,
           selectionCount: initialSelectionCount,
-          percentComplete: 100
+          percentComplete: 100,
+          state: states.SELECTING
         },
         () => {
           try {

@@ -1,7 +1,46 @@
 import React, { Component } from 'react';
+import states from './states';
 
 class CreateButton extends Component {
   render() {
+    let content;
+    switch (this.props.state) {
+      case states.CREATING_PLAYLIST:
+        content = <span>Creating playlist ...</span>;
+        break;
+      case states.PLAYLIST_CREATED:
+        content = <span>Playlist Created!</span>;
+        break;
+      default:
+        if (this.props.isEditing) {
+          content = [
+            <input
+              type="text"
+              className="create-playlist-input"
+              defaultValue={'Playlist name...'}
+              placeholder="Enter playlist name..."
+              ref="input"
+              key="input"
+            />,
+            <a href="#" key="btn" onClick={this._createPlaylist} className="create-playlist-go">
+              Go
+            </a>
+          ];
+        } else {
+          content = (
+            <a
+              href="#"
+              onClick={evt => {
+                evt.preventDefault();
+              }}
+            >
+              Export to Spotify
+              <span className="create-playlist-count"> ({this.props.selectionCount})</span>
+            </a>
+          );
+        }
+    }
+
     return (
       <span
         className={
@@ -12,29 +51,7 @@ class CreateButton extends Component {
         onClick={this.props.isEditing ? null : this._setEditing}
         onKeyUp={this._handleKeyUp}
       >
-        {this.props.isEditing
-          ? [
-              <input
-                type="text"
-                className="create-playlist-input"
-                defaultValue={'Playlist name...'}
-                placeholder="Enter playlist name..."
-                ref="input"
-                key="input"
-              />,
-              <a href="#" key="btn" onClick={this._createPlaylist} className="create-playlist-go">
-                Go
-              </a>
-            ]
-          : <a
-              href="#"
-              onClick={evt => {
-                evt.preventDefault();
-              }}
-            >
-              Export to Spotify
-              <span className="create-playlist-count"> ({this.props.selectionCount})</span>
-            </a>}
+        {content}
       </span>
     );
   }
