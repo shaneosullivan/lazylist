@@ -340,6 +340,12 @@ a:hover {
   color: #fff;
 }
 
+.create-playlist-tick {
+  width: 50px;
+  vertical-align: middle;
+  margin-right: 33px;
+}
+
 .play-button-control-wrapper {
   position: absolute;
   top: 36px;

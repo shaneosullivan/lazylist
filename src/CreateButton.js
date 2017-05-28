@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import states from './states';
+import tick from './images/tick.png';
 
 class CreateButton extends Component {
   render() {
@@ -9,7 +10,12 @@ class CreateButton extends Component {
         content = <span>Creating playlist ...</span>;
         break;
       case states.PLAYLIST_CREATED:
-        content = <span>Playlist Created!</span>;
+        content = (
+          <span>
+            <img src={tick} className="create-playlist-tick" />
+            <span>Playlist Created!</span>
+          </span>
+        );
         break;
       default:
         if (this.props.isEditing) {

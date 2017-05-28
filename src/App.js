@@ -62,7 +62,7 @@ class App extends Component {
         }
       }
     }
-    location.hash = '';
+    window.location.hash = '';
   }
 
   _isLoggedIn() {

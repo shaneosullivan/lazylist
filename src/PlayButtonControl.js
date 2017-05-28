@@ -14,6 +14,7 @@ class PlayButton extends Component {
           allowTransparency="true"
           width="250"
           height="80"
+          title="playbutton"
           onLoad={this._handleLoad}
         />
       </span>
