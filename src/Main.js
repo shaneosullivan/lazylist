@@ -5,7 +5,7 @@ import GridColumn from './GridColumn';
 import GridColumnHeader from './GridColumnHeader';
 import Loading from './Loading';
 import MenuButton from './MenuButton';
-import IntroButton from './IntroButton';
+import IntroScreen from './IntroScreen';
 import ExportPlaylist from './ExportPlaylist';
 import throttle from './throttle';
 import states from './states';
@@ -82,7 +82,7 @@ class Main extends Component {
               onEdit={this._editPlaylistName}
             />
             <MenuButton />
-            <IntroButton />
+            <IntroScreen />
             {this.state.state === states.EDITING_PLAYLIST_NAME ||
               this.state.state === states.CREATING_PLAYLIST ||
               this.state.state === states.PLAYLIST_CREATED
