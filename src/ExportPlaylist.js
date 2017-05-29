@@ -44,6 +44,8 @@ export default class ExportPlaylist extends Component {
       case states.PLAYLIST_CREATED:
         content = <div>Playlist "{this.state.playlistName}" created!!</div>;
         break;
+      default:
+        content = null;
     }
 
     return (

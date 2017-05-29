@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import states from './states';
-import tick from './images/tick.png';
 
 class CreateButton extends Component {
   render() {
