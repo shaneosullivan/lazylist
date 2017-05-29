@@ -18,6 +18,23 @@ a:hover {
   opacity: 1;
 }
 
+.modal {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 20px;
+  z-index: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .App {
   background-color: black;
   text-align: center;
@@ -297,6 +314,14 @@ a:hover {
   background-color: #4BAC44;
 }
 
+.button.button-disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.button.button-disabled:hover {
+  background-color: #5ed856;
+}
 
 .create-playlist {
   position: fixed;
@@ -382,6 +407,28 @@ a:hover {
   position: absolute;
   top: -21px;
   left: -21px;
+}
+
+.export-playlist {
+  color: white;
+  font-size: 40px;
+}
+
+.export-playlist a.button {
+  color: black;
+  height: 64px;
+  width: 282px;
+  display: inline-block;
+}
+
+.export-playlist input {
+  font-size: 40px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  border-radius: 100px;
+  outline: none;
+  padding-left: 25px;
+  padding-right: 25px;
 }
 
 .visible {

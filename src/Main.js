@@ -6,6 +6,7 @@ import GridColumnHeader from './GridColumnHeader';
 import Loading from './Loading';
 import MenuButton from './MenuButton';
 import IntroButton from './IntroButton';
+import ExportPlaylist from './ExportPlaylist';
 import throttle from './throttle';
 import states from './states';
 
@@ -30,7 +31,6 @@ class Main extends Component {
       mostRecentSelection: null,
       selectionCount: 0,
       percentComplete: 0,
-      isEditingPlaylistName: false,
       scrollX: window.scrollX,
       containerWidth: window.innerWidth
     };
@@ -76,7 +76,6 @@ class Main extends Component {
           <div className="grid-body">
             {artists.map(this._renderColumn)}
             <CreateButton
-              isEditing={this.state.isEditingPlaylistName}
               selectionCount={this.state.selectionCount}
               state={this.state.state}
               onCreate={this._createPlaylist}
@@ -84,6 +83,15 @@ class Main extends Component {
             />
             <MenuButton />
             <IntroButton />
+            {this.state.state === states.EDITING_PLAYLIST_NAME ||
+              this.state.state === states.CREATING_PLAYLIST ||
+              this.state.state === states.PLAYLIST_CREATED
+              ? <ExportPlaylist
+                  onExport={this._createPlaylist}
+                  onClose={this._handleModalClose}
+                  state={this.state.state}
+                />
+              : null}
           </div>
         </div>
       );
@@ -119,7 +127,7 @@ class Main extends Component {
   };
 
   _editPlaylistName = () => {
-    this.setState({ isEditingPlaylistName: true });
+    this.setState({ state: states.EDITING_PLAYLIST_NAME });
   };
 
   _createPlaylist = (name: string) => {
@@ -149,7 +157,7 @@ class Main extends Component {
             }
             Promise.all(promises)
               .then(() => {
-                this.setState({ isEditingPlaylistName: false, state: states.PLAYLIST_CREATED });
+                this.setState({ state: states.PLAYLIST_CREATED });
 
                 setTimeout(
                   () => {
@@ -218,6 +226,10 @@ class Main extends Component {
       scrollX: window.scrollX,
       containerWidth: window.innerWidth
     });
+  };
+
+  _handleModalClose = () => {
+    this.setState({ state: states.SELECTING });
   };
 
   _fetchData() {
