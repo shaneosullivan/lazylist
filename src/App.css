@@ -280,22 +280,11 @@ a:hover {
 
 
 .full-screen-menu {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  box-sizing: border-box;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.6);
   color: white;
   font-size: 40px;
   padding: 20px;
-  z-index: 4;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
 }
+
 .description {
   width: 80%;
   max-width: 960px;
