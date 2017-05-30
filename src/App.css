@@ -11,11 +11,8 @@ html, body, #root, .App {
   -webkit-font-smoothing: antialiased;
 }
 a {
-  color: #000;
+  color: #fff;
   text-decoration: none;
-}
-a:hover {
-  opacity: 1;
 }
 
 .modal {
@@ -25,7 +22,7 @@ a:hover {
   box-sizing: border-box;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.8);
   color: white;
   padding: 20px;
   z-index: 4;
@@ -56,56 +53,49 @@ a:hover {
   font-size: large;
 }
 
-.login {
-  color: #fff;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-sizing: border-box;
-  background-size: contain;
-  background: url(images/background.jpg);
-  background-size: cover;
-
-}
-.login div {
-  margin: 16px;
-}
 .login-header {
   font-size: 72px;
 }
-.login-description {
-  font-size: 24px;
-  margin-bottom: 32px !important;
-}
-
 .login-button {
   color: #fff;
   width: 282px;
   height: 64px;
 }
-
-.loading {
-  position: absolute;
-  top: 0;
-  left: 0;
-  color: white;
-  font-size: 24px;
+.background {
+  background: url(images/background.jpg) no-repeat;
+  background-size: cover;
   width: 100%;
   height: 100%;
+  top: 0;
+  left: 0;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  opacity: 0.8;
+}
+.content {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
 }
-.loading-header {
-  font-size: 24px;
+.content div {
+  margin: 20px;
 }
+
 .percent {
   font-size: 200px;
+  margin: 0 !important;
+  padding: 0 !important;
 }
+
 .intro {
   z-index: 4;
   width: 100%;
@@ -122,15 +112,6 @@ a:hover {
   font-size: 40px;
 }
 
-.intro div {
-  margin: 60px;
-}
-.intro-button {
-  color: #fff;
-  width: 282px;
-  height: 64px;
-  margin-top: 50px;
-}
 
 .main {
   background-color: #000000;
@@ -164,15 +145,18 @@ a:hover {
 .grid-artist-name {
   color: #fff;
   display: block;
-  font-size: 18px;
-  height: 65px;
-  padding-top: 49px;
+  font-size: 20px;
+  height: 100px;
   overflow: hidden;
   width: 180px;
   position: absolute;
   z-index: 3;
   background: #000;
   text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .grid-artist-name:hover {
   opacity: 0.5;
@@ -219,6 +203,7 @@ a:hover {
 .selected {
   opacity: 1;
 }
+
 .unselected {
   opacity: 0.2;
 }
@@ -234,7 +219,6 @@ a:hover {
   margin-top: 20px;
   font-size: 14px;
   text-decoration: none;
-  padding-top: 8px;
   padding-bottom: 32px;
   padding-left: 24px;
   padding-right: 24px;
@@ -249,7 +233,7 @@ a:hover {
   margin-top: -100px;
   height: 20px;
   width: 20px;
-  background-color: rgba(255,255,255,0.6);
+  background-color: #4BAC44;
   background-position: center center;
   background-image: url(images/tick.png);
   background-size: 13px 9px;
@@ -257,102 +241,132 @@ a:hover {
   border-radius: 100px;
 }
 
-.menu-button {
-  cursor: pointer;
-}
-
 .menu-button-link {
-  line-height: 64px;
-  width: 32px;
-  height: 32px;
   position: fixed;
   bottom: 20px;
-  left: 20px;
-  padding: 20px 20px;
-  background-image: url(images/hamburger.png);
-  background-repeat: no-repeat;
-  background-size: 19px 15px;
-  background-position: 26px 28px;
-  opacity: 1;
-  border-radius: 100px;
+  left: 30px;
+  height: 64px;
   z-index: 3;
+  display: block;
+  cursor: pointer;
+  font-size: 24px;
+  color: #5ed856;
+}
+.menu-button-link:hover {
+  opacity: 0.5;
 }
 
-
-.full-screen-menu {
-  color: white;
+.footer {
+  width: 100%;
+  height: 80px;
+  background: url(images/footer.png) repeat-x;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  color: #fff;
   font-size: 40px;
-  padding: 20px;
+  line-height: 80px;
+  z-index: 3;
+}
+.select {
+    position: fixed;
+    bottom: 20px;
+    left: 60px;
+    height: 64px;
+    z-index: 3;
+    display: block;
+    cursor: pointer;
+    font-size: 24px;
+    color: #fff;
+}
+.select a {
+  opacity: 0.5;
+}
+.select a:hover {
+  opacity: 1;
 }
 
 .description {
   width: 80%;
-  max-width: 960px;
+  max-width: 800px;
+  font-size: 24px;
+  opacity: 0.8;
+  line-height: 32px;
+}
+.description-big {
+  font-size: 40px;
+  width: 80%;
+  max-width: 600px;
+  line-height: 44px;
+}
+.description-small {
+  font-size: 14px;
+  line-height: 24px;
+  opacity: 0.8;
 }
 
 .button {
-  font-size: 20px;
   cursor: pointer;
   line-height: 64px;
+  font-size: 20px;
   background-color: #5ed856;
   border-radius: 100px;
-  color: #000;
+  color: #fff;
+  width: 282px;
+  height: 64px;
 }
 
 .button:hover {
   background-color: #4BAC44;
+  cursor: pointer;
 }
 
 .button.button-disabled {
-  opacity: 0.4;
-  cursor: default;
+  opacity: 1;
+  background: #265622;
+  color: #808080 !important;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 .button.button-disabled:hover {
-  background-color: #5ed856;
+  background-color: #265622;
+  color: #808080;
 }
 
 .create-playlist {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  width: 282px;
+  width: 500px;
   height: 64px;
   z-index: 3;
-  transition: width 0.1s ease-in;
-}
-
-.create-playlist.editing {
-  width: 400px;
-}
-
-.create-playlist a {
-  text-decoration: none;
-  color: #000000;
+  display: block;
   cursor: pointer;
+  font-size: 40px;
+  text-align: right;
+}
+.create-playlist a {
+  color: #5ed856;
+}
+.create-playlist a:hover {
+  opacity: 0.8;
 }
 
-.create-playlist-input {
-  margin-right: 8px;
-  font-size: 24px;
-  width: 280px;
-  border-radius: 18px;
-  padding: 4px;
-  padding-left: 20px;
-  margin-top: 13px;
-  border: none;
-  background: none;
-  outline: none;
-  color: #000;
+.spotify {
+  background: url(images/spotify.png) no-repeat center center;
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  display: inline-block;
+}
+.create-playlist-count {
+  color: #fff;
   opacity: 0.5;
 }
 
-.create-playlist-go {
-  border: none;
-  border-radius: 20px;
-  padding: 8px;
-  color: #fff;
-}
 
 .create-playlist-tick {
   width: 50px;
@@ -398,16 +412,12 @@ a:hover {
   left: -21px;
 }
 
-.export-playlist {
-  color: white;
-  font-size: 40px;
-}
-
 .export-playlist a.button {
-  color: black;
+  color: #fff;
   height: 64px;
   width: 282px;
-  display: inline-block;
+  display: block;
+  z-index: 4;
 }
 
 .export-playlist input {
@@ -418,6 +428,11 @@ a:hover {
   outline: none;
   padding-left: 25px;
   padding-right: 25px;
+  border: none;
+  background: none;
+  text-align: center;
+  color: #fff;
+  font-family: "Circular";
 }
 
 .visible {

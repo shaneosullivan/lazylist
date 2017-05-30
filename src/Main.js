@@ -10,7 +10,7 @@ import ExportPlaylist from './ExportPlaylist';
 import throttle from './throttle';
 import states from './states';
 
-const GRID_CELL_SIZE = 180;
+const GRID_CELL_SIZE = 181;
 const LOCAL_STORAGE_KEY = '__top_artists__';
 const NUM_ARTISTS = 50;
 const NUM_TRACKS = 50;
@@ -75,14 +75,21 @@ class Main extends Component {
           </div>
           <div className="grid-body">
             {artists.map(this._renderColumn)}
-            <CreateButton
-              selectionCount={this.state.selectionCount}
-              state={this.state.state}
-              onCreate={this._createPlaylist}
-              onEdit={this._editPlaylistName}
-            />
-            <MenuButton />
+
             <IntroScreen />
+            <div className="footer">
+              <MenuButton />
+              <div className="select"><a href="">All</a> <a href="">None</a></div>
+              90min
+              <CreateButton
+                selectionCount={this.state.selectionCount}
+                state={this.state.state}
+                onCreate={this._createPlaylist}
+                onEdit={this._editPlaylistName}
+              />
+
+            </div>
+
             {this.state.state === states.EDITING_PLAYLIST_NAME ||
               this.state.state === states.CREATING_PLAYLIST ||
               this.state.state === states.PLAYLIST_CREATED
