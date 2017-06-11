@@ -5,10 +5,12 @@ import GridColumn from './GridColumn';
 import GridColumnHeader from './GridColumnHeader';
 import Loading from './Loading';
 import MenuButton from './MenuButton';
+import SelectButton from './SelectButton';
 import IntroScreen from './IntroScreen';
 import ExportPlaylist from './ExportPlaylist';
 import throttle from './throttle';
 import states from './states';
+import selectionMutator from './selectionMutator';
 
 const GRID_CELL_SIZE = 180;
 const LOCAL_STORAGE_KEY = '__top_artists__';
@@ -27,6 +29,7 @@ class Main extends Component {
       spotify: null,
       state: states.LOADING,
       artists: [],
+      trackCount: 0,
       selection: {},
       mostRecentSelection: null,
       selectionCount: 0,
@@ -82,6 +85,12 @@ class Main extends Component {
               onEdit={this._editPlaylistName}
             />
             <MenuButton />
+            <SelectButton
+              trackCount={this.state.trackCount}
+              onSelectAll={this._handleSelectAll}
+              onSelectNone={this._handleSelectNone}
+              onSelectReverse={this._handleSelectReverse}
+            />
             <IntroScreen />
             {this.state.state === states.EDITING_PLAYLIST_NAME ||
               this.state.state === states.CREATING_PLAYLIST ||
@@ -232,6 +241,16 @@ class Main extends Component {
     this.setState({ state: states.SELECTING });
   };
 
+  _handleSelectAll = () => {
+    this.setState(selectionMutator.selectAll(this.state.artists));
+  };
+  _handleSelectNone = () => {
+    this.setState(selectionMutator.selectNone(this.state.artists));
+  };
+  _handleSelectReverse = () => {
+    this.setState(selectionMutator.selectReverse(this.state.artists, this.state.selection));
+  };
+
   _fetchData() {
     let topArtists = [];
     let topArtistsFromTracks = {};
@@ -244,13 +263,17 @@ class Main extends Component {
     let initialSelectionCount = 0;
 
     const finalizeData = () => {
+      let trackCount = 0;
+      topArtists.forEach(artist => trackCount += artist.topTracks.length);
+
       this.setState(
         {
           artists: topArtists,
           selection: initialSelection,
           selectionCount: initialSelectionCount,
           percentComplete: 100,
-          state: states.SELECTING
+          state: states.SELECTING,
+          trackCount
         },
         () => {
           try {

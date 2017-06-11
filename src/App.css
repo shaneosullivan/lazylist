@@ -278,11 +278,24 @@ a:hover {
   z-index: 3;
 }
 
+.menu-header {
+  text-decoration: underline;
+}
 
-.full-screen-menu {
+.select-button-link {
+  left: 120px;
+  width: 55px;
+  background: none;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 64px;
+
+}
+
+.full-screen-menu, .full-screen-menu a {
   color: white;
   font-size: 40px;
-  padding: 20px;
+  margin: 20px;
 }
 
 .description {
