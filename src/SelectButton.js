@@ -61,7 +61,9 @@ export default class SelectButton extends Component {
     this.props.onSelectReverse();
   };
 
-  _open = () => {
+  _open = evt => {
+    evt.stopPropagation();
+    evt.preventDefault();
     this.setState({
       isOpen: true
     });
