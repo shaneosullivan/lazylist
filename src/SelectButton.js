@@ -29,6 +29,9 @@ export default class SelectButton extends Component {
               <div className="description">
                 <a href="#" onClick={this._selectReverse}>Reverse Selection</a>
               </div>
+              <div className="description">
+                <a href="#" onClick={this._selectRandom}>Random</a>
+              </div>
               <div className="description menu-cancel">
                 <a href="#" onClick={this._close}>Cancel</a>
               </div>
@@ -46,6 +49,11 @@ export default class SelectButton extends Component {
   _selectNone = () => {
     this._close();
     this.props.onSelectNone();
+  };
+
+  _selectRandom = () => {
+    this._close();
+    this.props.onSelectRandom();
   };
 
   _selectReverse = () => {

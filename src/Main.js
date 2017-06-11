@@ -86,6 +86,7 @@ class Main extends Component {
                 trackCount={this.state.trackCount}
                 onSelectAll={this._handleSelectAll}
                 onSelectNone={this._handleSelectNone}
+                onSelectRandom={this._handleSelectRandom}
                 onSelectReverse={this._handleSelectReverse}
               />
               {this._formatDuration(this.state.selectionDurationMs)}
@@ -254,6 +255,9 @@ class Main extends Component {
   };
   _handleSelectNone = () => {
     this.setState(selectionMutator.selectNone(this.state.artists));
+  };
+  _handleSelectRandom = () => {
+    this.setState(selectionMutator.selectRandom(this.state.artists));
   };
   _handleSelectReverse = () => {
     this.setState(selectionMutator.selectReverse(this.state.artists, this.state.selection));
