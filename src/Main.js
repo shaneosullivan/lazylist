@@ -79,7 +79,6 @@ class Main extends Component {
           </div>
           <div className="grid-body">
             {artists.map(this._renderColumn)}
-            <MenuButton />
             <IntroScreen />
             <div className="footer">
               <MenuButton />
