@@ -15,34 +15,43 @@ export default class ExportPlaylist extends Component {
     switch (this.props.state) {
       case states.EDITING_PLAYLIST_NAME:
         content = (
-          <div>
-            <div>Enter a name</div>
-            <div>
-              <input
-                ref={this._focusInput}
-                placeholder="E.g. My Top 100 Songs"
-                type="text"
-                value={this.state.playlistName}
-                onChange={this._handleNameChange}
-              />
-            </div>
-            <div>
+          <div className="content">
+            <div className="description">Give it a name</div>
+            <input
+              ref={this._focusInput}
+              placeholder="E.g. My Top 100 Songs"
+              type="text"
+              value={this.state.playlistName}
+              onChange={this._handleNameChange}
+            />
+            <div className="button">
               <a
                 href="#"
                 className={'button' + (!this._isValidName() ? ' button-disabled' : '')}
                 onClick={this._handleExport}
               >
-                Export to Spotify
+              Export to Spotify
               </a>
             </div>
           </div>
         );
         break;
       case states.CREATING_PLAYLIST:
-        content = <div>Creating Playlist "{this.state.playlistName}" ...</div>;
+        content = (
+          <div className="content">
+            <div className="description">Exporting a Playlist</div>
+            <div className="description-big">"{this.state.playlistName}"</div>
+          </div>
+        );
         break;
       case states.PLAYLIST_CREATED:
-        content = <div>Playlist "{this.state.playlistName}" created!!</div>;
+        content = (
+          <div className="content">
+            <div className="description">Your playlist</div>
+            <div className="description-big">"{this.state.playlistName}"</div>
+            <div className="description">exported to Spotify!</div>
+          </div>
+          );
         break;
       default:
         content = null;

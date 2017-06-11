@@ -4,18 +4,21 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
-        <div className="login-header">
-          Spotlist
-        </div>
-        <div className="login-description">
-          A better way to make Spotify playlists
-        </div>
-        <a href={this._generateSpotifyLink()}>
-          <div className="button login-button">
-            Login to Spotify
+        <div className="background"></div>
+        <div className="content">
+          <div className="login-header">
+            Spotlist
           </div>
-        </a>
-        <div className="copy">
+          <div className="description">
+            Spotlist makes it easy to discover and save music <br /> on Spotify by matching your top tracks to what's trending
+          </div>
+          <a href={this._generateSpotifyLink()}>
+            <div className="button">
+              Login to Spotify
+            </div>
+          </a>
+          <div className="copy">
+          </div>
         </div>
       </div>
     );

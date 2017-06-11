@@ -6,9 +6,8 @@ export default class GridColumnHeader extends Component {
     return (
       <div className="grid-col">
         <a href="#" onClick={this._toggleArtist} className="grid-artist-name">
-          {artist.name}
+          <span>{artist.name}</span>
         </a>
-
       </div>
     );
   }
