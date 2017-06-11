@@ -12,7 +12,7 @@ class MenuButton extends Component {
   render() {
     return (
       <div className="menu-button">
-        <a href="#" className="menu-button-link" onClick={this._open} >?</a>
+        <a href="#" className="menu-button-link" onClick={this._open}>?</a>
         {this.state.isOpen
           ? <Modal className="full-screen-menu" onClose={this._close}>
               <div className="content">
@@ -23,7 +23,13 @@ class MenuButton extends Component {
                   Click on the tracks or artists to add to a playlist and save it to Spotify.
                 </div>
                 <div className="description-small">
-                  Made by <a href="http://twitter.com/shane" target="_blank">Shane O'Sullivan</a> & <a href="http://twitter.com/karoliskosas" target="_blank">Karolis Kosas</a>
+                  Made by
+                  {' '}
+                  <a href="http://twitter.com/chofter" target="_blank">Shane O'Sullivan</a>
+                  {' '}
+                  &
+                  {' '}
+                  <a href="http://twitter.com/karoliskosas" target="_blank">Karolis Kosas</a>
                   <br />
                   Not affiliated with Spotify.
                 </div>
@@ -34,7 +40,9 @@ class MenuButton extends Component {
     );
   }
 
-  _open = () => {
+  _open = evt => {
+    evt.stopPropagation();
+    evt.preventDefault();
     this.setState({
       isOpen: true
     });
