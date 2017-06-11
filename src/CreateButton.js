@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import cancelEvt from './cancelEvt';
 
 class CreateButton extends Component {
   render() {
@@ -25,8 +26,7 @@ class CreateButton extends Component {
 
   _createPlaylist = evt => {
     if (evt) {
-      evt.stopPropagation();
-      evt.preventDefault();
+      cancelEvt(evt);
     }
     this.props.onCreate(this.refs.input.value);
   };

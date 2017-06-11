@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import cancelEvt from './cancelEvt';
 
 export default class GridColumnHeader extends Component {
   render() {
@@ -13,8 +14,7 @@ export default class GridColumnHeader extends Component {
   }
 
   _toggleArtist = evt => {
-    evt.stopPropagation();
-    evt.preventDefault();
+    cancelEvt(evt);
     this.props.onArtistToggle(this.props.artist);
   };
 }

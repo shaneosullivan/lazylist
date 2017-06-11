@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from './Modal';
+import cancelEvt from './cancelEvt';
 
 class MenuButton extends Component {
   constructor() {
@@ -41,8 +42,7 @@ class MenuButton extends Component {
   }
 
   _open = evt => {
-    evt.stopPropagation();
-    evt.preventDefault();
+    cancelEvt(evt);
     this.setState({
       isOpen: true
     });
@@ -55,8 +55,7 @@ class MenuButton extends Component {
   };
 
   _createPlaylist = evt => {
-    evt.stopPropagation();
-    evt.preventDefault();
+    cancelEvt(evt);
     this.props.onCreate(this.refs.input.value);
   };
 }

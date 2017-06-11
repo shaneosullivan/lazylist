@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Modal from './Modal';
+import cancelEvt from './cancelEvt';
 
 export default class SelectButton extends Component {
   constructor() {
@@ -41,22 +42,30 @@ export default class SelectButton extends Component {
     );
   }
 
-  _selectAll = () => {
+  _selectAll = evt => {
+    cancelEvt(evt);
+
     this._close();
     this.props.onSelectAll();
   };
 
-  _selectNone = () => {
+  _selectNone = evt => {
+    cancelEvt(evt);
+
     this._close();
     this.props.onSelectNone();
   };
 
-  _selectRandom = () => {
+  _selectRandom = evt => {
+    cancelEvt(evt);
+
     this._close();
     this.props.onSelectRandom();
   };
 
-  _selectReverse = () => {
+  _selectReverse = evt => {
+    cancelEvt(evt);
+
     this._close();
     this.props.onSelectReverse();
   };
