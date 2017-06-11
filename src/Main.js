@@ -13,7 +13,7 @@ import states from './states';
 import selectionMutator from './selectionMutator';
 
 const GRID_CELL_SIZE = 181;
-const LOCAL_STORAGE_KEY = '__top_artists__';
+const LOCAL_STORAGE_KEY = '__top_artists_v2__';
 const NUM_ARTISTS = 50;
 const NUM_TRACKS = 50;
 const MAX_TRACKS = 10;
@@ -33,6 +33,7 @@ class Main extends Component {
       selection: {},
       mostRecentSelection: null,
       selectionCount: 0,
+      selectionDurationMs: 0,
       percentComplete: 0,
       scrollX: window.scrollX,
       containerWidth: window.innerWidth
@@ -88,7 +89,7 @@ class Main extends Component {
                 onSelectNone={this._handleSelectNone}
                 onSelectReverse={this._handleSelectReverse}
               />
-              90min
+              {this._formatDuration(this.state.selectionDurationMs)}
               <CreateButton
                 selectionCount={this.state.selectionCount}
                 state={this.state.state}
@@ -205,6 +206,8 @@ class Main extends Component {
     this.setState({
       selection,
       selectionCount: this.state.selectionCount + (selection[track.id] ? 1 : -1),
+      selectionDurationMs: this.state.selectionDurationMs +
+        track.duration_ms * (selection[track.id] ? 1 : -1),
       mostRecentSelection: selection[track.id] ? track.id : null
     });
   };
@@ -257,6 +260,19 @@ class Main extends Component {
     this.setState(selectionMutator.selectReverse(this.state.artists, this.state.selection));
   };
 
+  _formatDuration(timeMs) {
+    let seconds = Math.floor(timeMs / 1000);
+    let hours = Math.floor(seconds / 3600);
+    let minutes = Math.floor(seconds / 60) % 60;
+    let remainderSeconds = seconds % 60;
+
+    let hoursString = hours > 0 ? hours + 'h' : '';
+    let minutesString = minutes > 0 ? minutes + 'min' : '';
+    let secondsString = hours === 0 && remainderSeconds > 0 ? remainderSeconds + 's' : '';
+
+    return (hoursString + ' ' + minutesString + ' ' + secondsString).trim();
+  }
+
   _fetchData() {
     let topArtists = [];
     let topArtistsFromTracks = {};
@@ -266,20 +282,14 @@ class Main extends Component {
     const timeRanges = ['medium_term', 'long_term', 'short_term'];
     let topTrackIDs = {};
     let initialSelection = {};
-    let initialSelectionCount = 0;
 
     const finalizeData = () => {
-      let trackCount = 0;
-      topArtists.forEach(artist => trackCount += artist.topTracks.length);
-
       this.setState(
         {
           artists: topArtists,
-          selection: initialSelection,
-          selectionCount: initialSelectionCount,
           percentComplete: 100,
           state: states.SELECTING,
-          trackCount
+          ...selectionMutator.selectIdentity(topArtists, initialSelection)
         },
         () => {
           try {
@@ -289,8 +299,7 @@ class Main extends Component {
                 version: VERSION,
                 expires: Date.now() + 1000 * 60 * 60,
                 artists: topArtists,
-                selection: initialSelection,
-                selectionCount: initialSelectionCount
+                selection: initialSelection
               })
             );
           } catch (e) {}
@@ -312,7 +321,6 @@ class Main extends Component {
         if (topArtistsData.expires > Date.now() && topArtistsData.version === VERSION) {
           topArtists = topArtistsData.artists;
           initialSelection = topArtistsData.selection;
-          initialSelectionCount = topArtistsData.selectionCount;
           finalizeData();
           return;
         }
@@ -343,7 +351,6 @@ class Main extends Component {
         if (topArtistsFromTracks[id].length < MAX_TRACKS) {
           topArtistsFromTracks[id].push(track);
           initialSelection[track.id] = track;
-          initialSelectionCount++;
         }
       });
     }

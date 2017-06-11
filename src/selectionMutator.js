@@ -1,37 +1,52 @@
+function selectIdentity(artists, selection) {
+  let selectionCount = 0;
+  let selectionDurationMs = 0;
+  let trackCount = 0;
+
+  let processTrack = track => {
+    if (selection[track.id]) {
+      selectionCount++;
+      selectionDurationMs += track.duration_ms;
+    }
+    trackCount++;
+  };
+  artists.forEach(artist => {
+    artist.topTracks.forEach(processTrack);
+  });
+  return { selection, selectionCount, selectionDurationMs, mostRecentSelection: null, trackCount };
+}
+
 function selectAll(artists) {
   let selection = {};
-  let selectionCount = 0;
   let addTrack = track => {
     selection[track.id] = track;
-    selectionCount++;
   };
   artists.forEach(artist => {
     artist.topTracks.forEach(addTrack);
   });
-  return { selection, selectionCount, mostRecentSelection: null };
+  return selectIdentity(artists, selection);
 }
 
-function selectNone() {
-  return { selection: {}, selectionCount: 0, mostRecentSelection: null };
+function selectNone(artists) {
+  return selectIdentity(artists, {});
 }
 
 function selectReverse(artists, selection) {
   let newSelection = {};
-  let selectionCount = 0;
   let maybeAddTrack = track => {
     if (!selection[track.id]) {
       newSelection[track.id] = track;
-      selectionCount++;
     }
   };
   artists.forEach(artist => {
     artist.topTracks.forEach(maybeAddTrack);
   });
-  return { selection: newSelection, selectionCount, mostRecentSelection: null };
+  return selectIdentity(artists, newSelection);
 }
 
 module.exports = {
   selectAll,
+  selectIdentity,
   selectNone,
   selectReverse
 };
