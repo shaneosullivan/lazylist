@@ -2,6 +2,32 @@ import React, { Component } from 'react';
 import PlayButtonControl from './PlayButtonControl';
 
 class GridColumn extends Component {
+  constructor() {
+    super();
+    this.state = {
+      selectionCount: -1
+    };
+  }
+  shouldComponentUpdate(nextProps) {
+    // Since drawing hundreds of images is performance critical, do a bit of extra work here to
+    // check whether the column of tracks actually needs to redraw
+    const shouldUpdate = this.props !== nextProps &&
+      (this.props.imagesVisible !== nextProps.imagesVisible ||
+        this.props.artist !== nextProps.artist ||
+        (this.props.mostRecentSelection &&
+          nextProps.artist.topTracks.some(track => track.id === this.props.mostRecentSelection)) ||
+        this.state.selectionCount !==
+          this._countSelection(nextProps.artist.topTracks, nextProps.selection));
+
+    return shouldUpdate;
+  }
+
+  componentDidUpdate() {
+    this.setState({
+      selectionCount: this._countSelection(this.props.artist.topTracks, this.props.selection)
+    });
+  }
+
   render() {
     let artist = this.props.artist;
     return (
@@ -49,6 +75,16 @@ class GridColumn extends Component {
       </div>
     );
   };
+
+  _countSelection(tracks, selection) {
+    let count = 0;
+    tracks.forEach(track => {
+      if (selection[track.id]) {
+        count++;
+      }
+    });
+    return count;
+  }
 
   _isTrackSelected(track) {
     return !!this.props.selection[track.id];
