@@ -256,23 +256,32 @@ a {
   opacity: 0.5;
 }
 
-.menu-header {
+.menu-header, .menu-cancel a {
   text-decoration: underline;
 }
 
-.select-button-link {
+.button.select-button-link {
   left: 120px;
-  width: 55px;
+  width: inherit;
   background: none;
   padding-top: 0;
   padding-bottom: 0;
   height: 64px;
+  color: #5ed856;
+  font-size: 40px;
+}
 
+.button.select-button-link:hover {
+  background: none;
 }
 
 .full-screen-menu, .full-screen-menu a {
   color: white;
   font-size: 40px;
+}
+
+.full-screen-menu a {
+  display: inline-block;
   margin: 20px;
 }
 

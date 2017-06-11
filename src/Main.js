@@ -78,23 +78,16 @@ class Main extends Component {
           </div>
           <div className="grid-body">
             {artists.map(this._renderColumn)}
-            <CreateButton
-              selectionCount={this.state.selectionCount}
-              state={this.state.state}
-              onCreate={this._createPlaylist}
-              onEdit={this._editPlaylistName}
-            />
             <MenuButton />
-            <SelectButton
-              trackCount={this.state.trackCount}
-              onSelectAll={this._handleSelectAll}
-              onSelectNone={this._handleSelectNone}
-              onSelectReverse={this._handleSelectReverse}
-            />
             <IntroScreen />
             <div className="footer">
               <MenuButton />
-              <div className="select"><a href="">All</a> <a href="">None</a></div>
+              <SelectButton
+                trackCount={this.state.trackCount}
+                onSelectAll={this._handleSelectAll}
+                onSelectNone={this._handleSelectNone}
+                onSelectReverse={this._handleSelectReverse}
+              />
               90min
               <CreateButton
                 selectionCount={this.state.selectionCount}

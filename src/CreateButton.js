@@ -4,12 +4,17 @@ class CreateButton extends Component {
   render() {
     return (
       <span
-        className={
-          'create-playlist' + (this.props.selectionCount > 0 ? ' visible' : ' invisible')
-        }
+        className={'create-playlist' + (this.props.selectionCount > 0 ? ' visible' : ' invisible')}
         onClick={this._setEditing}
       >
-          <a href="#" onClick={evt => { evt.preventDefault();}}>Save to Spotify</a>
+        <a
+          href="#"
+          onClick={evt => {
+            evt.preventDefault();
+          }}
+        >
+          Save to Spotify
+        </a>
       </span>
     );
   }

@@ -29,7 +29,7 @@ export default class SelectButton extends Component {
               <div className="description">
                 <a href="#" onClick={this._selectReverse}>Reverse Selection</a>
               </div>
-              <div className="description">
+              <div className="description menu-cancel">
                 <a href="#" onClick={this._close}>Cancel</a>
               </div>
             </Modal>
