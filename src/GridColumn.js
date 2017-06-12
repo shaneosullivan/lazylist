@@ -12,7 +12,8 @@ class GridColumn extends Component {
     // Since drawing hundreds of images is performance critical, do a bit of extra work here to
     // check whether the column of tracks actually needs to redraw
     const shouldUpdate = this.props !== nextProps &&
-      (this.props.imagesVisible !== nextProps.imagesVisible ||
+      (this.props.forceRerender ||
+        this.props.imagesVisible !== nextProps.imagesVisible ||
         this.props.artist !== nextProps.artist ||
         (this.props.mostRecentSelection &&
           nextProps.artist.topTracks.some(track => track.id === this.props.mostRecentSelection)) ||

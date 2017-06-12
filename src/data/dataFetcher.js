@@ -16,32 +16,40 @@ export default function dataFetcher(spotify, noCache, percentCallback, finalCall
   const timeRanges = ['medium_term', 'long_term', 'short_term'];
   let topTrackIDs = {};
   let initialSelection = {};
+  let percentComplete = 0;
 
-  const finalizeData = () => {
+  const updateData = callback => {
+    let currentSelection = initialSelection;
+    initialSelection = {};
     finalCallback(
       {
         artists: topArtists,
-        percentComplete: 100,
+        percentComplete: percentComplete,
         state: states.SELECTING,
-        ...selectionMutator.selectIdentity(topArtists, initialSelection)
+        ...selectionMutator.selectIdentity(topArtists, currentSelection)
       },
-      () => {
-        try {
-          window.localStorage.setItem(
-            LOCAL_STORAGE_KEY,
-            JSON.stringify({
-              version: VERSION,
-              expires: Date.now() + 1000 * 60 * 60,
-              artists: topArtists,
-              selection: initialSelection
-            })
-          );
-        } catch (e) {}
-      }
+      callback || function() {}
     );
   };
 
-  let percentComplete = 0;
+  const finalizeData = () => {
+    percentComplete = 100;
+
+    updateData(() => {
+      try {
+        window.localStorage.setItem(
+          LOCAL_STORAGE_KEY,
+          JSON.stringify({
+            version: VERSION,
+            expires: Date.now() + 1000 * 60 * 60,
+            artists: topArtists,
+            selection: initialSelection
+          })
+        );
+      } catch (e) {}
+    });
+  };
+
   const setPercentComplete = value => {
     percentComplete = Math.ceil(Math.max(percentComplete, value));
     percentCallback(percentComplete);
@@ -158,6 +166,8 @@ export default function dataFetcher(spotify, noCache, percentCallback, finalCall
             artistCounter /
             topArtists.length
       );
+      updateData();
+
       if (artistCounter < topArtists.length) {
         // Get the next artist
         fetchTopTracksForNextArtist();

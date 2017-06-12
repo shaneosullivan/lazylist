@@ -131,6 +131,7 @@ class Main extends Component {
         imagesVisible={imagesVisible}
         selection={this.state.selection}
         mostRecentSelection={this.state.mostRecentSelection}
+        forceRerender={this.state.percentComplete < 100}
         onArtistToggle={this._toggleArtist}
         onTrackToggle={this._toggleTrack}
       />
@@ -279,7 +280,15 @@ class Main extends Component {
         this.setState({ percentComplete });
       },
       (finalState, callback) => {
-        this.setState(finalState, callback);
+        let newState = {
+          ...finalState,
+          ...selectionMutator.selectIdentity(finalState.artists, {
+            ...this.state.selection,
+            ...finalState.selection
+          })
+        };
+
+        this.setState(newState, callback);
       }
     );
   }
