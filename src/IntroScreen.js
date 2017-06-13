@@ -13,13 +13,13 @@ class IntroButton extends Component {
     return (
       <div className="menu-button">
         {this.state.isOpen
-          ? <Modal className="full-screen-menu" onClose={this._close}>
-              <div className="content">
+          ? <Modal className="full-screen-menu">
+              <div className="content" onClose={this._close}>
                 <div className="description-big">
-                  We selected your top 100 tracks and matched them to global favorites
+                  We selected your top 100 tracks and found similar stuff
                 </div>
                 <div className="description">
-                  Click on the tracks or artists to add to a playlist and save it to Spotify.
+                  Click on a track or an artist to add to your playlist
                 </div>
                 <div className="button" onClick={this._close}>
                   Let's Go!

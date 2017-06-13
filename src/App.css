@@ -13,6 +13,10 @@ html, body, #root, .App {
 a {
   color: #fff;
   text-decoration: none;
+  color: #5ed856;
+}
+a:hover {
+  color: #4BAC44;
 }
 
 .modal {
@@ -249,7 +253,7 @@ a {
   z-index: 3;
   display: block;
   cursor: pointer;
-  font-size: 24px;
+  font-size: 40px;
   color: #5ed856;
 }
 .menu-button-link:hover {
@@ -260,29 +264,18 @@ a {
   text-decoration: underline;
 }
 
-.button.select-button-link {
-  left: 120px;
+.select-button-link {
+  left: 80px;
   width: inherit;
   background: none;
   padding-top: 0;
   padding-bottom: 0;
   height: 64px;
   color: #5ed856;
-  font-size: 40px;
 }
 
 .button.select-button-link:hover {
   background: none;
-}
-
-.full-screen-menu, .full-screen-menu a {
-  color: white;
-  font-size: 40px;
-}
-
-.full-screen-menu a {
-  display: inline-block;
-  margin: 20px;
 }
 
 .footer {
@@ -298,31 +291,23 @@ a {
   line-height: 80px;
   z-index: 3;
 }
-.select {
-    position: fixed;
-    bottom: 20px;
-    left: 60px;
-    height: 64px;
-    z-index: 3;
-    display: block;
-    cursor: pointer;
-    font-size: 24px;
-    color: #fff;
+
+.duration {
+  width: 300px;
+  left: 50%;
+  position: fixed;
+  bottom: 4px;
+  margin-left: -100px;
 }
-.select a {
-  opacity: 0.5;
-}
-.select a:hover {
-  opacity: 1;
-}
+
 
 .description {
   width: 80%;
   max-width: 800px;
   font-size: 24px;
-  opacity: 0.8;
   line-height: 32px;
 }
+
 .description-big {
   font-size: 40px;
   width: 80%;
@@ -335,6 +320,23 @@ a {
   opacity: 0.8;
 }
 
+.menu-options a {
+  display: block;
+  line-height: 56px;
+  color: #5ed856;
+
+}
+.menu-options a:hover {
+  color: #4BAC44;
+}
+
+.spacer {
+  height: 20px;
+  width: 100%;
+}
+
+
+
 .button {
   cursor: pointer;
   line-height: 64px;
@@ -345,6 +347,7 @@ a {
   width: 282px;
   height: 64px;
 }
+
 
 .button:hover {
   background-color: #4BAC44;
@@ -365,24 +368,23 @@ a {
   color: #808080;
 }
 
+
+
 .create-playlist {
   position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 500px;
+  bottom: 15px;
+  right: 15px;
+  width: 200px;
   height: 64px;
   z-index: 3;
   display: block;
   cursor: pointer;
   font-size: 40px;
-  text-align: right;
 }
-.create-playlist a {
-  color: #5ed856;
+.create-playlist .button {
+  width: 200px;
 }
-.create-playlist a:hover {
-  opacity: 0.8;
-}
+
 
 .spotify {
   background: url(images/spotify.png) no-repeat center center;
@@ -475,4 +477,10 @@ a {
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+@media (max-width: 600px) {
+  .duration {
+    display: none;
+  }
 }

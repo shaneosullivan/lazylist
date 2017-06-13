@@ -84,7 +84,7 @@ class Main extends Component {
                 onSelectRandom={this._handleSelectRandom}
                 onSelectReverse={this._handleSelectReverse}
               />
-              {this._formatDuration(this.state.selectionDurationMs)}
+              <div className="duration">{this._formatDuration(this.state.selectionDurationMs)}</div>
               <CreateButton
                 selectionCount={this.state.selectionCount}
                 state={this.state.state}
@@ -269,7 +269,7 @@ class Main extends Component {
     let minutesString = minutes > 0 ? minutes + 'min' : '';
     let secondsString = hours === 0 && remainderSeconds > 0 ? remainderSeconds + 's' : '';
 
-    return (hoursString + ' ' + minutesString + ' ' + secondsString).trim();
+    return (hoursString + ' ' + minutesString).trim();
   }
 
   _fetchData() {

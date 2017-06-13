@@ -15,23 +15,14 @@ class MenuButton extends Component {
       <div className="menu-button">
         <a href="#" className="menu-button-link" onClick={this._open}>?</a>
         {this.state.isOpen
-          ? <Modal className="full-screen-menu" onClose={this._close}>
-              <div className="content">
+          ? <Modal className="full-screen-menu" onClick={this._close}>
+              <div className="content" onClick={this._close}>
                 <div className="description-big">
-                  Spotlist makes it easy to discover and save music on Spotify by matching your top tracks to global favorites.
+                  Spotlist makes it easy to make Spotify playlists by matching your top tracks to similar music
                 </div>
                 <div className="description">
-                  Click on the tracks or artists to add to a playlist and save it to Spotify.
-                </div>
-                <div className="description-small">
-                  Made by
-                  {' '}
-                  <a href="http://twitter.com/chofter" target="_blank">Shane O'Sullivan</a>
-                  {' '}
-                  &
-                  {' '}
-                  <a href="http://twitter.com/karoliskosas" target="_blank">Karolis Kosas</a>
-                  <br />
+                  Made by <a href="http://twitter.com/chofter" target="_blank">Shane Sullivan</a> & <a href="http://twitter.com/karoliskosas" target="_blank">Karolis Kosas</a>
+                  <div className="spacer"></div>
                   Not affiliated with Spotify.
                 </div>
               </div>

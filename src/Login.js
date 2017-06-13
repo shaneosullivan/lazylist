@@ -17,8 +17,6 @@ class Login extends Component {
               Login to Spotify
             </div>
           </a>
-          <div className="copy">
-          </div>
         </div>
       </div>
     );

@@ -13,28 +13,24 @@ export default class SelectButton extends Component {
   render() {
     return (
       <div className="menu-button">
-        <a href="#" className="button menu-button-link select-button-link" onClick={this._open}>
+        <a href="#" className="menu-button-link select-button-link" onClick={this._open}>
           Select
         </a>
         {this.state.isOpen
-          ? <Modal className="full-screen-menu" onClose={this._close}>
-              <div className="description menu-header">
-                Select Songs
-              </div>
-              <div className="description">
-                <a href="#" onClick={this._selectAll}>All {this.props.trackCount} Songs</a>
-              </div>
-              <div className="description">
-                <a href="#" onClick={this._selectNone}>No Songs</a>
-              </div>
-              <div className="description">
-                <a href="#" onClick={this._selectReverse}>Reverse Selection</a>
-              </div>
-              <div className="description">
-                <a href="#" onClick={this._selectRandom}>Random</a>
-              </div>
-              <div className="description menu-cancel">
-                <a href="#" onClick={this._close}>Cancel</a>
+          ? <Modal className="full-screen-menu">
+              <div className="content" onClick={this._close}>
+                <div className="description">
+                  Select
+                </div>
+                <div className="menu-options">
+                  <div className="spacer"></div>
+                  <a href="#" onClick={this._selectReverse}>Your Top · 100</a>
+                  <a href="#" onClick={this._selectReverse}>Recommended · 100</a>
+                  <a href="#" onClick={this._selectRandom}>Random · 100</a>
+                  <div className="spacer"></div>
+                  <a href="#" onClick={this._selectAll}>All · {this.props.trackCount}</a>
+                  <a href="#" onClick={this._selectNone}>None</a>
+                </div>
               </div>
             </Modal>
           : null}
