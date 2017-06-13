@@ -89,6 +89,7 @@ a:hover {
   top: 0;
   left: 0;
   color: #fff;
+  cursor: pointer;
 }
 .content div {
   margin: 20px;
