@@ -71,6 +71,7 @@ class GridColumn extends Component {
         />
         <div className={'grid-cell-label' + labelStyle}>
           <span className="label">{track.name}</span>
+          <span className="number">TOP 1</span>
         </div>
         <div className={'grid-cell-tick' + tickStyle} />
       </div>

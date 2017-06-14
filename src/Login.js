@@ -4,13 +4,20 @@ class Login extends Component {
   render() {
     return (
       <div className="login">
-        <div className="background"></div>
+        <div className="background">
+          <div className="image i1"></div>
+          <div className="image i2"></div>
+          <div className="image i3"></div>
+          <div className="image i4"></div>
+          <div className="image i5"></div>
+          <div className="image i6"></div>
+        </div>
         <div className="content">
           <div className="login-header">
             Spotlist
           </div>
           <div className="description">
-            Spotlist makes it easy to discover and save music <br /> on Spotify by matching your top tracks to what's trending
+            Makes it easy to create Spotify playlists by matching your top songs to trending tracks of your favorite artists
           </div>
           <a href={this._generateSpotifyLink()}>
             <div className="button">
