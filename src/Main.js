@@ -26,6 +26,7 @@ class Main extends Component {
       artists: [],
       trackCount: 0,
       selection: {},
+      initialSelection: {},
       mostRecentSelection: null,
       selectionCount: 0,
       selectionDurationMs: 0,
@@ -82,7 +83,8 @@ class Main extends Component {
                 onSelectAll={this._handleSelectAll}
                 onSelectNone={this._handleSelectNone}
                 onSelectRandom={this._handleSelectRandom}
-                onSelectReverse={this._handleSelectReverse}
+                onSelectInitial={this._handleSelectInitial}
+                onSelectRecommended={this._handleSelectRecommended}
               />
               <div className="duration">{this._formatDuration(this.state.selectionDurationMs)}</div>
               <CreateButton
@@ -255,8 +257,11 @@ class Main extends Component {
   _handleSelectRandom = () => {
     this.setState(selectionMutator.selectRandom(this.state.artists));
   };
-  _handleSelectReverse = () => {
-    this.setState(selectionMutator.selectReverse(this.state.artists, this.state.selection));
+  _handleSelectInitial = () => {
+    this.setState(selectionMutator.selectIdentity(this.state.artists, this.state.initialSelection));
+  };
+  _handleSelectRecommended = () => {
+    this.setState(selectionMutator.selectReverse(this.state.artists, this.state.initialSelection));
   };
 
   _formatDuration(timeMs) {
@@ -287,6 +292,8 @@ class Main extends Component {
             ...finalState.selection
           })
         };
+
+        newState.initialSelection = newState.selection;
 
         this.setState(newState, callback);
       }

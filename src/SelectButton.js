@@ -23,11 +23,11 @@ export default class SelectButton extends Component {
                   Select
                 </div>
                 <div className="menu-options">
-                  <div className="spacer"></div>
-                  <a href="#" onClick={this._selectReverse}>Your Top · 100</a>
-                  <a href="#" onClick={this._selectReverse}>Recommended · 100</a>
+                  <div className="spacer" />
+                  <a href="#" onClick={this._selectInitial}>Your Top · 100</a>
+                  <a href="#" onClick={this._selectRecommended}>Recommended · 100</a>
                   <a href="#" onClick={this._selectRandom}>Random · 100</a>
-                  <div className="spacer"></div>
+                  <div className="spacer" />
                   <a href="#" onClick={this._selectAll}>All · {this.props.trackCount}</a>
                   <a href="#" onClick={this._selectNone}>None</a>
                 </div>
@@ -59,11 +59,18 @@ export default class SelectButton extends Component {
     this.props.onSelectRandom();
   };
 
-  _selectReverse = evt => {
+  _selectInitial = evt => {
     cancelEvt(evt);
 
     this._close();
-    this.props.onSelectReverse();
+    this.props.onSelectInitial();
+  };
+
+  _selectRecommended = evt => {
+    cancelEvt(evt);
+
+    this._close();
+    this.props.onSelectRecommended();
   };
 
   _open = evt => {
