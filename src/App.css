@@ -58,15 +58,33 @@ a:hover {
 }
 
 .login-header {
-  font-size: 72px;
+  font-size: 56px;
+  color: #000;
 }
-.login-button {
-  color: #fff;
-  width: 282px;
-  height: 64px;
+.login .description {
+  padding-bottom: 20px;
+  color: #000;
+  opacity: 0.6;
+}
+
+.login .button {
+  color: #000;
+
+  background: #3de76e;
+  border: 1px solid #3de76e;
+  margin-top: 20px;
+}
+.login .button:hover {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.7);
 }
 .background {
-  background: #3DE76E;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#3de76e+2,3de76e+25,53fcda+100 */
+  background: #3de76e; /* Old browsers */
+  background: -moz-linear-gradient(left,  #3de76e 2%, #3de76e 25%, #53fcda 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left,  #3de76e 2%,#3de76e 25%,#53fcda 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right,  #3de76e 2%,#3de76e 25%,#53fcda 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3de76e', endColorstr='#53fcda',GradientType=1 ); /* IE6-9 */
   width: 100%;
   height: 100%;
   top: 0;
@@ -78,14 +96,14 @@ a:hover {
   overflow: hidden;
 }
 .image {
-  width: 270px;
-  height: 270px;
+  width: 234px;
+  height: 234px;
   position: absolute;
   background-size: cover;
-  box-shadow: 0px 10px 40px rgba(0,0,0,0.12);
 }
 .i1 {
   background: url("images/albums/01.png") no-repeat;
+  background-size: cover;
   bottom: 50px;
   right: 0px;
   -ms-transform: rotate(7deg); /* IE 9 */
@@ -94,6 +112,7 @@ a:hover {
 }
 .i2 {
   background: url("images/albums/02.png") no-repeat;
+  background-size: cover;
   top: 0px;
   right: 200px;
   -ms-transform: rotate(7deg); /* IE 9 */
@@ -102,6 +121,7 @@ a:hover {
 }
 .i3 {
   background: url("images/albums/03.png") no-repeat;
+  background-size: cover;
   bottom: -100px;
   left: 200px;
   -ms-transform: rotate(7deg); /* IE 9 */
@@ -110,6 +130,7 @@ a:hover {
 }
 .i4 {
   background: url("images/albums/04.png") no-repeat;
+  background-size: cover;
   top: -50px;
   left: 100px;
   -ms-transform: rotate(-10deg); /* IE 9 */
@@ -118,6 +139,7 @@ a:hover {
 }
 .i5 {
   background: url("images/albums/05.png") no-repeat;
+  background-size: cover;
   top: 200px;
   right: -150px;
   -ms-transform: rotate(-7deg); /* IE 9 */
@@ -126,6 +148,7 @@ a:hover {
 }
 .i6 {
   background: url("images/albums/06.png") no-repeat;
+  background-size: cover;
   bottom: 200px;
   left: -100px;
   -ms-transform: rotate(-15deg); /* IE 9 */
@@ -326,12 +349,12 @@ a:hover {
 
 .select-button-link {
   left: 80px;
+  bottom: 20px;
   width: inherit;
   background: none;
-  padding-top: 0;
-  padding-bottom: 0;
   height: 64px;
   color: #5ed856;
+  position: fixed;
 }
 
 .button.select-button-link:hover {
@@ -357,7 +380,7 @@ a:hover {
   left: 50%;
   position: fixed;
   bottom: 4px;
-  margin-left: -100px;
+  margin-left: -150px;
 }
 
 
@@ -539,8 +562,179 @@ a:hover {
   to { transform: rotate(360deg); }
 }
 
-@media (max-width: 600px) {
-  .duration {
+@media (min-width: 1280px) {
+  .image {
+    width: 350px;
+    height: 350px;
+  }
+  .i2 {
+    top: -150px;
+    right: 350px;
+  }
+  .i3 {
+    left: 400px;
+  }
+}
+
+@media (max-width: 680px) {
+  .content {
+    background: rgba(0,0,0,0.2);
+  }
+  .image {
+    width: 350px;
+    height: 350px;
+  }
+  .i3 {
+    bottom: 50%;
+    left: 40%;
+    margin-left: -175px;
+    margin-bottom: -175px;
+  }
+  .i4 {
+    top: 50%;
+    left: 60%;
+    margin-left: -175px;
+    margin-top: -250px;
+  }
+  .i2 {
+     top: 50%;
+     left: 55%;
+     margin-left: -175px;
+     margin-top: -80px;
+     -ms-transform: rotate(-7deg);
+     -webkit-transform: rotate(-7deg);
+     transform: rotate(-7deg);
+  }
+  .i1,.i5,.i6 {
     display: none;
   }
+
+
+  .login .description {
+    color: #fff;
+    font-size: 18px;
+    line-height: 24px;
+    opacity: 1;
+    width: 70%;
+    margin-bottom: 32px;
+  }
+  .login .button {
+    color: #fff;
+    background: #3de76e;
+    border: 1px solid #3de76e;
+    font-size: 18px;
+    width: 240px;
+    height: 60px;
+    line-height: 60px;
+  }
+
+  .grid-header {
+    height: 60px;
+  }
+  .grid-col {
+    min-height: 60px;
+    width: 120px;
+  }
+  .grid-artist-name {
+    font-size: 16px;
+    height: 60px;
+    width: 120px;
+  }
+  .grid-cell {
+    width: 100px;
+    height: 100px;
+  }
+  .grid-cell-label {
+    padding-top: 0;
+    padding-bottom: 40px;
+  }
+  .number {
+    display: none;
+  }
+  .grid-cell-tick {
+    margin-left: 100px;
+  }
+  .play-button {
+    display: none;
+  }
+  .duration {
+    font-size: 16px;
+    width: 100px;
+    margin-left: -50px;
+  }
+  .menu-button-link {
+    display: none;
+  }
+  .footer {
+    height: 60px;
+    line-height: 60px;
+  }
+  .select-button-link {
+    font-size: 16px;
+    left: 20px;
+    bottom: 0px;
+    width: inherit;
+    background: none;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 64px;
+    color: #5ed856;
+  }
+  .create-playlist {
+    position: fixed;
+    bottom: 16px;
+    height: 40px;
+    right: 10px;
+    width: 80px;
+    z-index: 3;
+    display: block;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .create-playlist .button {
+    width: 80px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+  }
+  .button {
+    height: 50px;
+    line-height: 50px;
+    width: 200px;
+    font-size: 16px;
+  }
+  .export-playlist a.button {
+    height: 50px;
+    line-height: 50px;
+    width: 200px;
+  }
+  .content div {
+    margin: 8px;
+  }
+  .spacer {
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+  .menu-options a {
+    font-size: 24px;
+    line-height: 40px;
+  }
+  .description {
+    font-size: 16px;
+    line-height: 24px;
+    padding-bottom: 20px;
+  }
+  .description-big {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .login-header {
+    font-size: 48px;
+    color: #fff;
+  }
+  .export-playlist input {
+    font-size: 24px;
+  }
+
 }
