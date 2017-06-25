@@ -13,7 +13,7 @@ export default class SelectButton extends Component {
   render() {
     return (
       <div className="menu-button">
-        <a href="#" className="menu-button-link select-button-link" onClick={this._open}>
+        <a href="#" className="select-button-link" onClick={this._open}>
           Select
         </a>
         {this.state.isOpen

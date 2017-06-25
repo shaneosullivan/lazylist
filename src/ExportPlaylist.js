@@ -58,7 +58,7 @@ export default class ExportPlaylist extends Component {
     }
 
     return (
-      <Modal className="export-playlist" onClose={this.props.onClose}>
+      <Modal className="export-playlist">
         {content}
       </Modal>
     );

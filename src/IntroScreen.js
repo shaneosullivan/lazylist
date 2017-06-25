@@ -14,7 +14,7 @@ class IntroButton extends Component {
       <div className="menu-button">
         {this.state.isOpen
           ? <Modal className="full-screen-menu">
-              <div className="content" onClose={this._close}>
+              <div className="content">
                 <div className="description-big">
                   We selected your top 100 tracks and found similar stuff
                 </div>
