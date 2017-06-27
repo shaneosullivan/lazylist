@@ -1,2 +1,2 @@
 # spotlist
-A better way to make Spotify playlists
+A better way to make Spotify playlists.
