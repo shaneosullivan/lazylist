@@ -18,8 +18,7 @@ class App extends Component {
   }
 
   render() {
-    const component = this._isLoggedIn() ? this._renderMain() : this._renderLogin();
-    return <div className="App">{component}</div>;
+    return this._isLoggedIn() ? this._renderMain() : this._renderLogin();
   }
 
   _renderLogin() {

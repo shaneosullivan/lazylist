@@ -3,12 +3,16 @@
     src: url("font/CircularStd-Book.woff");
 }
 
-html, body, #root, .App {
+html, body, #root {
   height: 100%;
   width: 100%;
   background-color: black;
   font-family: "Circular";
+  text-align: center;
   -webkit-font-smoothing: antialiased;
+}
+#root {
+  overflow: auto;
 }
 a {
   color: #fff;
@@ -34,11 +38,6 @@ a:hover {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.App {
-  background-color: black;
-  text-align: center;
 }
 
 .App-logo {
@@ -217,12 +216,13 @@ a:hover {
 
 .grid-body {
   flex: 1;
+  padding-bottom: 30px;
 }
 
 .grid-col {
   float: left;
-  width: 180px;
   min-height: 120px;
+  width: 180px;
 }
 
 .grid-artist-name {
@@ -231,7 +231,6 @@ a:hover {
   font-size: 20px;
   height: 100px;
   overflow: hidden;
-  width: 180px;
   position: absolute;
   z-index: 3;
   background: #000;
@@ -240,6 +239,7 @@ a:hover {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 180px;
 }
 .grid-artist-name:hover {
   opacity: 0.5;
@@ -451,8 +451,6 @@ a:hover {
   color: #808080;
 }
 
-
-
 .create-playlist {
   position: fixed;
   bottom: 15px;
@@ -464,10 +462,10 @@ a:hover {
   cursor: pointer;
   font-size: 40px;
 }
+
 .create-playlist .button {
   width: 200px;
 }
-
 
 .spotify {
   background: url(images/spotify.png) no-repeat center center;
@@ -476,11 +474,11 @@ a:hover {
   background-size: contain;
   display: inline-block;
 }
+
 .create-playlist-count {
   color: #fff;
   opacity: 0.5;
 }
-
 
 .create-playlist-tick {
   width: 50px;
@@ -580,22 +578,26 @@ a:hover {
   .content {
     background: rgba(0,0,0,0.2);
   }
+
   .image {
     width: 350px;
     height: 350px;
   }
+
   .i3 {
     bottom: 50%;
     left: 40%;
     margin-left: -175px;
     margin-bottom: -175px;
   }
+
   .i4 {
     top: 50%;
     left: 60%;
     margin-left: -175px;
     margin-top: -250px;
   }
+
   .i2 {
      top: 50%;
      left: 55%;
@@ -605,10 +607,10 @@ a:hover {
      -webkit-transform: rotate(-7deg);
      transform: rotate(-7deg);
   }
+
   .i1,.i5,.i6 {
     display: none;
   }
-
 
   .login .description {
     color: #fff;
@@ -618,6 +620,7 @@ a:hover {
     width: 70%;
     margin-bottom: 32px;
   }
+
   .login .button {
     color: #fff;
     background: #3de76e;

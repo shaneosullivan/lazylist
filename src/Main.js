@@ -13,9 +13,11 @@ import states from './states';
 import selectionMutator from './selectionMutator';
 import dataFetcher from './data/dataFetcher';
 
-const GRID_CELL_SIZE = 181;
+const WINDOW_SMALL_SIZE_THRESHOLD = 680;
+const GRID_CELL_SIZE_LARGE = 181;
+const GRID_CELL_SIZE_SMALL = 121;
 const MAX_TRACKS_PER_PLAYLIST_ADDITION = 100;
-const SCROLL_BUFFER = GRID_CELL_SIZE * 2;
+const SCROLL_BUFFER = GRID_CELL_SIZE_LARGE * 2;
 
 class Main extends Component {
   constructor() {
@@ -32,7 +34,10 @@ class Main extends Component {
       selectionDurationMs: 0,
       percentComplete: 0,
       scrollX: window.scrollX,
-      containerWidth: window.innerWidth
+      containerWidth: window.innerWidth,
+      gridCellSize: GRID_CELL_SIZE_LARGE,
+      scrollBuffer: SCROLL_BUFFER,
+      scrollContext: document.getElementById('root')
     };
   }
 
@@ -52,14 +57,19 @@ class Main extends Component {
       }
     );
 
+    this._updateSizesPerWindowSize();
+
     // Kind of nasty to listen to global scroll events here.
     // YOLO.
+    this._updateSizesPerWindowSize = throttle(this._updateSizesPerWindowSize, 250);
     this._handleScroll = throttle(this._handleScroll, 250);
-    window.addEventListener('scroll', this._handleScroll, false);
+    this.state.scrollContext.addEventListener('scroll', this._handleScroll, false);
+    window.addEventListener('resize', this._updateSizesPerWindowSize, false);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this._handleScroll, false);
+    document.getElementById('root').removeEventListener('scroll', this._handleScroll, false);
+    window.removeEventListener('resize', this._updateSizesPerWindowSize, false);
   }
 
   render() {
@@ -67,14 +77,16 @@ class Main extends Component {
     let content;
     let width = 'inherit';
     if (artists.length > 0) {
-      width = GRID_CELL_SIZE * artists.length + 'px';
+      width = this.state.gridCellSize * artists.length + 'px';
       content = (
-        <div className="grid-outer" style={{ width }}>
+        <div className="grid-outer" style={{ width: '100%' }}>
           <div className="grid-header">
             {artists.map(this._renderColumnHeader)}
           </div>
           <div className="grid-body">
             {artists.map(this._renderColumn)}
+          </div>
+          <div>
             <IntroScreen />
             <div className="footer">
               <MenuButton />
@@ -123,9 +135,9 @@ class Main extends Component {
   };
 
   _renderColumn = (artist, idx) => {
-    const leftColPos = idx * GRID_CELL_SIZE;
-    const imagesVisible = leftColPos > this.state.scrollX - SCROLL_BUFFER &&
-      leftColPos < this.state.scrollX + this.state.containerWidth + SCROLL_BUFFER;
+    const leftColPos = idx * this.state.gridCellSize;
+    const imagesVisible = leftColPos > this.state.scrollX - this.state.scrollBuffer &&
+      leftColPos < this.state.scrollX + this.state.containerWidth + this.state.scrollBuffer;
     return (
       <GridColumn
         artist={artist}
@@ -138,6 +150,19 @@ class Main extends Component {
         onTrackToggle={this._toggleTrack}
       />
     );
+  };
+
+  _updateSizesPerWindowSize = () => {
+    const desiredCellSize = window.innerWidth > WINDOW_SMALL_SIZE_THRESHOLD
+      ? GRID_CELL_SIZE_LARGE
+      : GRID_CELL_SIZE_SMALL;
+    if (this.state.gridCellSize !== desiredCellSize) {
+      this.setState({
+        gridCellSize: desiredCellSize,
+        scrollBuffer: desiredCellSize * 2
+      });
+    }
+    this._handleScroll();
   };
 
   _editPlaylistName = () => {
@@ -239,7 +264,7 @@ class Main extends Component {
 
   _handleScroll = (evt: any) => {
     this.setState({
-      scrollX: window.scrollX,
+      scrollX: this.state.scrollContext.scrollLeft,
       containerWidth: window.innerWidth
     });
   };
