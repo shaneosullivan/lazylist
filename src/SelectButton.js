@@ -23,7 +23,6 @@ export default class SelectButton extends Component {
                   Select
                 </div>
                 <div className="menu-options">
-                  <div className="spacer" />
                   <a href="#" onClick={this._selectInitial}>Your Top · 100</a>
                   <a href="#" onClick={this._selectRecommended}>Recommended · 100</a>
                   <a href="#" onClick={this._selectRandom}>Random · 100</a>

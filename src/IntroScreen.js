@@ -16,7 +16,7 @@ class IntroButton extends Component {
           ? <Modal className="full-screen-menu">
               <div className="content">
                 <div className="description-big">
-                  We selected your top 100 tracks and found similar stuff
+                  Here's your top artists and tracks.
                 </div>
                 <div className="description">
                   Click on a track or an artist to add to your playlist

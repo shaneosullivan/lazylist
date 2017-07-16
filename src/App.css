@@ -398,7 +398,7 @@ a:hover {
   line-height: 44px;
 }
 .description-small {
-  font-size: 14px;
+  font-size: 20px;
   line-height: 24px;
   opacity: 0.8;
 }
@@ -725,6 +725,11 @@ a:hover {
   }
   .description {
     font-size: 16px;
+    line-height: 24px;
+    padding-bottom: 20px;
+  }
+  .description-small {
+    font-size: 20px;
     line-height: 24px;
     padding-bottom: 20px;
   }

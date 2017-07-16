@@ -18,11 +18,10 @@ class MenuButton extends Component {
           ? <Modal className="full-screen-menu" onClick={this._close}>
               <div className="content" onClick={this._close}>
                 <div className="description-big">
-                  Spotlist makes it easy to make Spotify playlists by matching your top tracks to similar music
+                  Lazylist is the quickest way to create Spotify playlists from your favorite tracks.
                 </div>
-                <div className="description">
-                  Made by <a href="http://twitter.com/chofter" target="_blank">Shane Sullivan</a> & <a href="http://twitter.com/karoliskosas" target="_blank">Karolis Kosas</a>
-                  <div className="spacer"></div>
+                <div className="description-small">
+                  Made by <a href="http://twitter.com/chofter" target="_blank">Shane Sullivan</a> & <a href="http://twitter.com/karoliskosas" target="_blank">Karolis Kosas</a>.<br/>
                   Not affiliated with Spotify.
                 </div>
               </div>

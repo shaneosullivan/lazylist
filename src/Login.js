@@ -14,10 +14,10 @@ class Login extends Component {
         </div>
         <div className="content">
           <div className="login-header">
-            Spotlist
+            Lazylist
           </div>
           <div className="description">
-            Makes it easy to create Spotify playlists by matching your top songs to trending tracks of your favorite artists
+            The easy way to create Spotify playlists.
           </div>
           <a href={this._generateSpotifyLink()}>
             <div className="button">
