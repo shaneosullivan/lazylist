@@ -37,7 +37,7 @@ class Main extends Component {
       containerWidth: window.innerWidth,
       gridCellSize: GRID_CELL_SIZE_LARGE,
       scrollBuffer: SCROLL_BUFFER,
-      scrollContext: document.getElementById('root')
+      scrollContext: window
     };
   }
 
@@ -68,7 +68,7 @@ class Main extends Component {
   }
 
   componentWillUnmount() {
-    document.getElementById('root').removeEventListener('scroll', this._handleScroll, false);
+    this.state.scrollContext.removeEventListener('scroll', this._handleScroll, false);
     window.removeEventListener('resize', this._updateSizesPerWindowSize, false);
   }
 
@@ -264,7 +264,7 @@ class Main extends Component {
 
   _handleScroll = (evt: any) => {
     this.setState({
-      scrollX: this.state.scrollContext.scrollLeft,
+      scrollX: this.state.scrollContext.scrollX,
       containerWidth: window.innerWidth
     });
   };

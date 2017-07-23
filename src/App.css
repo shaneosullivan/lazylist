@@ -11,9 +11,7 @@ html, body, #root {
   text-align: center;
   -webkit-font-smoothing: antialiased;
 }
-#root {
-  overflow: auto;
-}
+
 a {
   color: #fff;
   text-decoration: none;
