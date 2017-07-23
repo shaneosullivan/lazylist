@@ -166,8 +166,13 @@ a:hover {
   color: #fff;
   cursor: pointer;
 }
-.content div {
+
+.content .content-inner div {
   margin: 20px;
+}
+
+.content .content-inner .button {
+  margin: auto;
 }
 
 .percent {
@@ -383,7 +388,6 @@ a:hover {
 
 
 .description {
-  width: 80%;
   max-width: 720px;
   font-size: 24px;
   line-height: 32px;
@@ -391,7 +395,6 @@ a:hover {
 
 .description-big {
   font-size: 40px;
-  width: 80%;
   max-width: 600px;
   line-height: 44px;
 }

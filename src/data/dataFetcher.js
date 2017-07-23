@@ -63,8 +63,11 @@ export default function dataFetcher(spotify, noCache, percentCallback, finalCall
       if (topArtistsData.expires > Date.now() && topArtistsData.version === VERSION) {
         topArtists = topArtistsData.artists;
         initialSelection = topArtistsData.selection;
-        finalizeData();
-        return;
+
+        if (Object.keys(initialSelection).length > 0) {
+          finalizeData();
+          return;
+        }
       }
     }
   } catch (e) {

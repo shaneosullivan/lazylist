@@ -15,14 +15,16 @@ class IntroButton extends Component {
         {this.state.isOpen
           ? <Modal className="full-screen-menu">
               <div className="content">
-                <div className="description-big">
-                  Here's your top artists and tracks.
-                </div>
-                <div className="description">
-                  Click on a track or an artist to add to your playlist
-                </div>
-                <div className="button" onClick={this._close}>
-                  Let's Go!
+                <div className="content-inner">
+                  <div className="description-big">
+                    Here's your top artists and tracks.
+                  </div>
+                  <div className="description">
+                    Click on a track or an artist to add to your playlist
+                  </div>
+                  <div className="button" onClick={this._close}>
+                    Let's Go!
+                  </div>
                 </div>
               </div>
             </Modal>

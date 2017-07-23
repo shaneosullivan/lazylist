@@ -15,43 +15,49 @@ export default class ExportPlaylist extends Component {
     switch (this.props.state) {
       case states.EDITING_PLAYLIST_NAME:
         content = (
-          <div className="content">
-            <div className="description">Give it a name</div>
-            <input
-              ref={this._focusInput}
-              placeholder="E.g. My Top 100 Songs"
-              type="text"
-              value={this.state.playlistName}
-              onChange={this._handleNameChange}
-            />
-            <div className="button">
-              <a
-                href="#"
-                className={'button' + (!this._isValidName() ? ' button-disabled' : '')}
-                onClick={this._handleExport}
-              >
-              Export to Spotify
-              </a>
+          <div className="content" onClick={this.props.onClose}>
+            <div className="content-inner" onClick={this._preventBubble}>
+              <div className="description">Give it a name</div>
+              <input
+                ref={this._focusInput}
+                placeholder="E.g. My Top 100 Songs"
+                type="text"
+                value={this.state.playlistName}
+                onChange={this._handleNameChange}
+              />
+              <div className="button">
+                <a
+                  href="#"
+                  className={'button' + (!this._isValidName() ? ' button-disabled' : '')}
+                  onClick={this._handleExport}
+                >
+                  Export to Spotify
+                </a>
+              </div>
             </div>
           </div>
         );
         break;
       case states.CREATING_PLAYLIST:
         content = (
-          <div className="content">
-            <div className="description">Exporting a Playlist</div>
-            <div className="description-big">"{this.state.playlistName}"</div>
+          <div className="content" onClick={this.props.onClose}>
+            <div className="content-inner" onClick={this._preventBubble}>
+              <div className="description">Exporting a Playlist</div>
+              <div className="description-big">"{this.state.playlistName}"</div>
+            </div>
           </div>
         );
         break;
       case states.PLAYLIST_CREATED:
         content = (
-          <div className="content">
-            <div className="description">Your playlist</div>
-            <div className="description-big">"{this.state.playlistName}"</div>
-            <div className="description">exported to Spotify!</div>
+          <div className="content" onClick={this.props.onClose}>
+            <div className="content-inner" onClick={this._preventBubble}>
+              <div className="description">Your playlist</div>
+              <div className="description-big">"{this.state.playlistName}"</div>
+              <div className="description">exported to Spotify!</div>
+            </div>
           </div>
-          );
+        );
         break;
       default:
         content = null;
@@ -76,6 +82,10 @@ export default class ExportPlaylist extends Component {
     if (this._isValidName()) {
       this.props.onExport(this.state.playlistName.trim());
     }
+  };
+
+  _preventBubble = evt => {
+    // evt.stopPropagation();
   };
 
   _focusInput(ref) {
